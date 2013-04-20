@@ -35,7 +35,7 @@ intercambiarConsecutivos = (f, g, Nothing)
 		f :: Maybe Char -> Char -> Maybe Char
 		f state character = case state of 
 							Nothing -> Just character
-							x -> Nothing
+							_ -> Nothing
 		--
 		g :: Maybe Char -> Char -> String
 		g state character = case state of
@@ -116,7 +116,8 @@ gAst' f g q0 (c:cs) = (g q0 c) ++ gAst' f g (f q0 c) cs
 -- (version con esquemas de recursion).
 --gAst :: (q -> Char -> q) -> (q -> Char -> String) ->
 --        q -> String -> String
---gAst f g q0 cadena = 
+-- gAst f g q0 cadena = foldr (\x frec -> (g (f q0 x) x) ++ frec) q0 cadena
+-- gAst f g q0 cadena = foldr (\x frec -> ) (g q0 c) cadena
 		
 -- Dado un traductor, retornar la funcion String -> String
 -- que resulta al aplicarlo a cualquier entrada
@@ -129,11 +130,11 @@ aplicando (f, g, q) = gAst' f g q   --es lo mismo que evaluar!
 -- uno de los parametros.
 comp :: Traductor qq1 -> Traductor qq2 -> Traductor (qq1, qq2)
 comp (f1, g1, qinicial1) (f2, g2, qinicial2) = 
-								 (
-								  \(q1,q2) caracter -> (fAst f1 q1 (g2 q2 caracter), f2 q2 caracter), --F es tupla de estados
-								  \(q1,q2) caracter -> (gAst' f1 g1 q1 (g2 q2 caracter)),	--G es string
-								  (qinicial1, qinicial2)
-								  )
+					 (
+					  \(q1,q2) caracter -> (fAst f1 q1 (g2 q2 caracter), f2 q2 caracter), --F es tupla de estados
+					  \(q1,q2) caracter -> (gAst' f1 g1 q1 (g2 q2 caracter)),	--G es string
+					  (qinicial1, qinicial2)
+					  )
 								  
 -- Dado un traductor, dar la cadena infinita que resulta de
 -- procesar una lista infinita de "a"s (si se pide
@@ -142,7 +143,24 @@ comp (f1, g1, qinicial1) (f2, g2, qinicial2) =
 salidaAes :: Traductor q -> String
 salidaAes traductor = evaluar traductor ['a'| x<-[0..]] 
 
+
 -- Decidir si es posible que el traductor dado de la salida
 -- dada como segundo parametro
---salidaPosible :: Traductor q -> String -> Bool
---salidaPosible traductor cadena = 
+salidaPosible :: Traductor q -> String -> Bool
+salidaPosible traductor cadena = (foldr (\x frec -> ((aplicando traductor x) == cadena) || frec) False (numeroConCeros cadena))
+
+-- Evalua todas las salidas posibles de strings de numeros para un traductor.
+verSalidaPosible :: Traductor q -> String -> [String]
+verSalidaPosible traductor cadena = (foldr (\x frec -> [(aplicando traductor x)] ++ frec) [[]] (numeroConCeros cadena))
+
+-- Devuelve todos los string de números "suficientes" para probar
+numeroConCeros cadena = take (10^(length cadena)) [ xs | n <- [0..], xs <- [completeWithZero n (length cadena)] ]
+  
+-- Completa un número con ceros no significativos.
+completarConCero ::  Int -> Int -> String
+completarConCero 0 longStr = replicate longStr '0' 
+completarConCero n longStr =  (replicate (longStr - (ceiling (logBase 10 (fromIntegral n)))) '0') ++ (show n) ++ []
+
+
+
+
