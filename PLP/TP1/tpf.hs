@@ -154,7 +154,7 @@ verSalidaPosible :: Traductor q -> String -> [String]
 verSalidaPosible traductor cadena = (foldr (\x frec -> [(aplicando traductor x)] ++ frec) [[]] (numeroConCeros cadena))
 
 -- Devuelve todos los string de números "suficientes" para probar
-numeroConCeros cadena = take (10^(length cadena)) [ xs | n <- [0..], xs <- [completeWithZero n (length cadena)] ]
+numeroConCeros cadena = take (10^(length cadena)) [ xs | n <- [0..], xs <- [completarConCero n (length cadena)] ]
   
 -- Completa un número con ceros no significativos.
 completarConCero ::  Int -> Int -> String
