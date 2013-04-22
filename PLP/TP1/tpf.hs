@@ -1,5 +1,6 @@
 import Prelude
 import Char
+import Practica1
 
 -- El traductor se representa por un conjunto de estados "q",
 --   - una funcion de transicion (primer parametro),
@@ -113,8 +114,18 @@ testAlgoInfinit = take 20 (gAst (\q c -> q) (\q c -> c:q) "" ['a'| x<-[0..]]) ==
 
 gAst :: (q -> Char -> q) -> (q -> Char -> String) -> q -> String -> String
 gAst f g q0 lista = concat [ g (getq0Alt f q0 (take i lista)) ((!!) lista i) | i <- [1..] ]
-
 getq0Alt f q0 sublista = fst (last (zipF f q0 sublista))
+
+gAst2 f g q0 lista = concat [ g (getq0Alt f q0 (listaPrefijo)) (last listaPrefijo) |  listaPrefijo <- (prefijosInfinito lista) ]
+
+prefijosInfinito xs = [ listaPrefijo | i <-[1..], listaPrefijo <- take 1 (choose xs i) ]
+prefijosFinito xs = [ listaPrefijo | i <-[1..(length xs)], listaPrefijo <- take 1 (choose xs i) ]
+
+choose :: [b] -> Int -> [[b]]
+_      `choose` 0       = [[]]
+[]     `choose` _       =  []
+(x:xs) `choose` k       =  (x:) `fmap` (xs `choose` (k-1)) ++ xs `choose` k
+
 
 zipF :: (q-> Char -> q) -> q -> String -> [(q,Char)]
 zipF f q0 (l1:lista) = foldl (\rec charLista -> rec ++ [(f (fst (last rec)) (snd (last rec)) , charLista)]) [(q0,l1)] lista
