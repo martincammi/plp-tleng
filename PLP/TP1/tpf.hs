@@ -1,14 +1,5 @@
 import Prelude
-
--- definiciones auxiliares
-third :: (a,b,c) -> c
-third (_,_,c) = c
-
-first :: (a,b,c) -> a
-first (a,_,_) = a
-
-second :: (a,b,c) -> b
-second (_,b,_) = b
+import Char
 
 -- El traductor se representa por un conjunto de estados "q",
 --   - una funcion de transicion (primer parametro),
@@ -38,6 +29,12 @@ intercambiarConsecutivos = (f, g, Nothing)
 		g state character = case state of
 							Nothing -> []
 							Just previous -> [character] ++ [previous]
+
+testIntercambiar = test0 && test1 && test2
+test0 = (aplicando intercambiarConsecutivos "av") == "va"
+test1 = (aplicando intercambiarConsecutivos "abcdbacc") == "badcabcc"
+test2 = (aplicando intercambiarConsecutivos "ohal") == "hola"
+
 
 -- Traductor que sea la identidad, salvo que nunca genera
 -- salida output de las "a"s y, cuando aparece una "z",
@@ -70,20 +67,12 @@ espejarEntreAs = (f, g, [])
 		g camino caracter = case caracter of
 							'a' -> (reverse camino) ++ [caracter]
 							x -> []		
-		
-espejarEntreAs' :: Traductor String
-espejarEntreAs' = (\camino caracter  -> fEspejar camino caracter,
-				   \camino caracter -> gEspejar camino caracter, [])		
 
-fEspejar :: String -> Char -> String
-fEspejar camino caracter = case caracter of
-							'a' -> []
-							x -> camino ++ [caracter]
-
-gEspejar :: String -> Char -> String
-gEspejar camino caracter = case caracter of
-							'a' -> (reverse camino) ++ [caracter]
-							x -> []	
+testEspejar = testE0 && testE1 && testE2 && testE3
+testE0 = (aplicando espejarEntreAs "123a456aa789a") == "321a654aa987a"
+testE1 = (aplicando espejarEntreAs "a1a") == "a1a"
+testE2 = (aplicando espejarEntreAs "123a") == "321a"
+testE3 = (aplicando espejarEntreAs "aaaa123aaaa") == "aaaa321aaaa"
 									
 -- Calcular la clausura de Kleene de la funcion de
 -- transicion pasada como parametro
@@ -96,7 +85,12 @@ fAst' f q0 (c:cs) = fAst' f (f q0 c) cs
 -- transicion pasada como parametro
 -- (version con esquemas de recursion).
 fAst :: (q -> Char -> q) -> q -> String -> q
-fAst = foldl 
+fAst = foldl
+ 
+testfAst = testCantidadAes && testSumaNumeros && testConstante
+testConstante = fAst (\q c -> q) 5 "cadena" == 5
+testCantidadAes = fAst (\q c -> (if c == 'a' then 1 else 0) + q) 0 "papa" == 2
+testSumaNumeros = fAst (\q c -> ((ord c) - 48) + q) 0 "1234" == 10
 
 -- Calcular la clausura de Kleene de la funcion de
 -- salida pasada como parametro junto con la funcion
@@ -121,12 +115,19 @@ gAst' f g q0 (c:cs) = (g q0 c) ++ gAst' f g (f q0 c) cs
 -- pasada como parametro junto con la funcion de
 -- transicion pasada como parametro
 -- (version con esquemas de recursion).
+
+
+testgAst = testAlgo
+testAlgo = gAst (\q c -> q) (\q c -> c:q) "" "probando"
+testAlgoInfinitOrig = gAst' (\q c -> q) (\q c -> c:q) "" ['a'| x<-[0..]]
+testAlgoInfinitAnt = gAstAlt (\q c -> q) (\q c -> c:q) "" ['a'| x<-[0..]]
+
+gAstAlt f g q0 lista = concat [ g (getq0Alt f q0 (take i lista)) ((!!) lista i) | i <- [1..] ]
+getq0Alt f q0 sublista = fst (last (zipF f q0 sublista))
+
+-- El que no anda
 gAst :: (q -> Char -> q) -> (q -> Char -> String) -> q -> String -> String
 gAst f g q0 lista = unzipG g (zipF f q0 lista)
-
--- Mariano
-gAstLOCO f g q0 lista = concat [ g (getQ0Loco f q0 (take i lista)) ((!!) lista i) | i <- [1..] ]
-getQ0Loco f q0 sublista = fst (last (zipF f q0 sublista))
 
 zipF :: (q-> Char -> q) -> q -> String -> [(q,Char)]
 zipF f q0 (l1:lista) = foldl (\rec charLista -> rec ++ [(f (fst (last rec)) (snd (last rec)) , charLista)]) [(q0,l1)] lista
@@ -144,7 +145,7 @@ unzipG g items = foldr (\item rec -> (uncurry g item) ++ rec) [] items
 -- Dado un traductor, retornar la funcion String -> String
 -- que resulta al aplicarlo a cualquier entrada
 aplicando :: Traductor q -> String -> String
-aplicando (f, g, q) = gAst f g q   --es lo mismo que evaluar!
+aplicando (f, g, q) = gAstAlt f g q   -- es evaluar la funcion!
 
 -- Dados dos traductores, dar un traductor tal que la
 -- funcion String -> String que denota el resultado, sea
@@ -163,12 +164,10 @@ comp (f1, g1, qinicial1) (f2, g2, qinicial2) =
 -- "take n (salidaAes t)" no puede procesar infinitamente
 -- para ningun "n")
 salidaAes :: Traductor q -> String
-salidaAes traductor = evaluar traductor ['a'| x<-[0..]]  
+salidaAes traductor = aplicando traductor ['a'| x<-[0..]]  
 
 --
 
-evaluar :: Traductor q -> String -> String
-evaluar traductor cadena = gAstLOCO (first traductor) (second traductor) (third traductor) cadena
 
 -- Decidir si es posible que el traductor dado de la salida
 -- dada como segundo parametro
@@ -196,5 +195,8 @@ cambiar10 = (const, g, ())
     g () '1' = ['0']
     g ()  x  = [x]
 
+
+charToInt :: Char -> Int
+charToInt c = (ord c) - 48
 
 
