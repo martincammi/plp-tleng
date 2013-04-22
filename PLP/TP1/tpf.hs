@@ -106,46 +106,23 @@ gAst' f g q0 (c:cs) = (g q0 c) ++ gAst' f g (f q0 c) cs
 -- pasada como parametro junto con la funcion de
 -- transicion pasada como parametro
 -- (version con esquemas de recursion).
---gAst :: (q -> Char -> q) -> (q -> Char -> String) ->
---        q -> String -> String
--- gAst f g q0 cadena = foldr (\x frec -> (g (f q0 x) x) ++ frec) q0 cadena
--- gAst f g q0 cadena = foldr (\x frec -> ) (g q0 c) cadena
 
--- Calcular la clausura de Kleene de la funcion de salida
--- pasada como parametro junto con la funcion de
--- transicion pasada como parametro
--- (version con esquemas de recursion).
+testgAst = testAlgoInfinit
+testId = gAst (\q c -> q) (\q c -> c:q) "" "probando"
+testAlgoInfinit = take 20 (gAst (\q c -> q) (\q c -> c:q) "" ['a'| x<-[0..]]) == "aaaaaaaaaaaaaaaaaaaa"
 
-
-testgAst = testAlgo
-testAlgo = gAst (\q c -> q) (\q c -> c:q) "" "probando"
-testAlgoInfinitOrig = gAst' (\q c -> q) (\q c -> c:q) "" ['a'| x<-[0..]]
-testAlgoInfinitAnt = gAstAlt (\q c -> q) (\q c -> c:q) "" ['a'| x<-[0..]]
-
-gAstAlt f g q0 lista = concat [ g (getq0Alt f q0 (take i lista)) ((!!) lista i) | i <- [1..] ]
+gAst :: (q -> Char -> q) -> (q -> Char -> String) ->
+        q -> String -> String
+gAst f g q0 lista = concat [ g (getq0Alt f q0 (take i lista)) ((!!) lista i) | i <- [1..] ]
 getq0Alt f q0 sublista = fst (last (zipF f q0 sublista))
-
--- El que no anda
-gAst :: (q -> Char -> q) -> (q -> Char -> String) -> q -> String -> String
-gAst f g q0 lista = unzipG g (zipF f q0 lista)
 
 zipF :: (q-> Char -> q) -> q -> String -> [(q,Char)]
 zipF f q0 (l1:lista) = foldl (\rec charLista -> rec ++ [(f (fst (last rec)) (snd (last rec)) , charLista)]) [(q0,l1)] lista
---zipF f q0 (l1:lista) = foldl3 (\rec charLista -> rec ++ [(f (fst (last rec)) (snd (last rec)) , charLista)]) [(q0,l1)] lista
 
--- Este foldl2 es foldl definido con foldr para permitir la evaluacion de cosas infinitas.
--- foldl2 f base xs = foldr (\x frec baseAcum -> frec (f baseAcum x)) id xs base
-foldl3 f a bs = foldr (\b g x -> g (f x b)) id bs a
-
---foldt f g base xs = foldr (\x frec -> (funcg  frec (f baseAcum x))) id xs g
-
-unzipG :: (q -> Char -> String) -> [(q,Char)] -> String
-unzipG g items = foldr (\item rec -> (uncurry g item) ++ rec) [] items
-		
 -- Dado un traductor, retornar la funcion String -> String
 -- que resulta al aplicarlo a cualquier entrada
 aplicando :: Traductor q -> String -> String
-aplicando (f, g, q) = gAstAlt f g q   -- es evaluar la funcion!
+aplicando (f, g, q) = gAst f g q   -- es evaluar la funcion!
 
 -- Dados dos traductores, dar un traductor tal que la
 -- funcion String -> String que denota el resultado, sea
@@ -165,9 +142,6 @@ comp (f1, g1, qinicial1) (f2, g2, qinicial2) =
 -- para ningun "n")
 salidaAes :: Traductor q -> String
 salidaAes traductor = aplicando traductor ['a'| x<-[0..]]  
-
---
-
 
 -- Decidir si es posible que el traductor dado de la salida
 -- dada como segundo parametro
@@ -200,3 +174,6 @@ charToInt :: Char -> Int
 charToInt c = (ord c) - 48
 
 
+-- Tests
+
+testAll = testIntercambiar && testEspejar && testfAst && testgAst
