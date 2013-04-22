@@ -108,12 +108,12 @@ gAst' f g q0 (c:cs) = (g q0 c) ++ gAst' f g (f q0 c) cs
 -- (version con esquemas de recursion).
 
 testgAst = testAlgoInfinit
-testId = gAst (\q c -> q) (\q c -> c:q) "" "probando"
+intercambiarDeApares = gAst (\q c -> [c]) (\q c -> q++[c]) "" "martin"
 testAlgoInfinit = take 20 (gAst (\q c -> q) (\q c -> c:q) "" ['a'| x<-[0..]]) == "aaaaaaaaaaaaaaaaaaaa"
 
-gAst :: (q -> Char -> q) -> (q -> Char -> String) ->
-        q -> String -> String
+gAst :: (q -> Char -> q) -> (q -> Char -> String) -> q -> String -> String
 gAst f g q0 lista = concat [ g (getq0Alt f q0 (take i lista)) ((!!) lista i) | i <- [1..] ]
+
 getq0Alt f q0 sublista = fst (last (zipF f q0 sublista))
 
 zipF :: (q-> Char -> q) -> q -> String -> [(q,Char)]
