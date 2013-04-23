@@ -11,7 +11,7 @@ import Char
 -- Felisatti, Ana
 
 -- Tests Ejecutar testAll para probar todos los tests de todos los ejercicios
-testAll = testIntercambiar && testEspejar && testfAst && testgAst && testSalidaAes && testSalidaPosible
+testAll = testIntercambiar && testEspejar && testfAst && testgAst && testComp && testSalidaAes && testSalidaPosible
 
 -- El traductor se representa por un conjunto de estados "q",
 --   - una funcion de transicion (primer parametro),
@@ -159,7 +159,7 @@ comp (f1, g1, qinicial1) (f2, g2, qinicial2) =
 					  \(q1,q2) caracter -> (gAst f1 g1 q1 (g2 q2 caracter)),		--G es string
 					  (qinicial1, qinicial2)						--Estado compuesto
 					  )
-testComp = testCompId && testComp && testCompComp
+testComp = testCompId && testComp2 && testCompComp
 testCompId = aplicando (comp cambiarAE cambiarAE) "SiDevuelveEstoEstaBien" == "SiDevuelveEstoEstaBien" 
 testComp2 = aplicando (comp cambiarAE cambiarEA) "Pepa" == "Pepe"
 testCompComp = aplicando (comp cambiarAE cambiarEA) "Pepa" == ((aplicando cambiarAE) . (aplicando cambiarEA)) "Pepa"
