@@ -1,0 +1,11 @@
+\noindent BEGIN $\longrightarrow$ initHtml HTML endHtml \\
+HTML $\longrightarrow$ HEAD BODY \\
+HEAD $\longrightarrow$ $\lambda$ $|$ initHead LEER\_HEAD endHead \\
+LEER\_HEAD $\longrightarrow$ SCRIPTS TITLE MORE\_SCRIPTS $|$ TITLE MORE\_SCRIPTS $|$ MORE\_SCRIPTS \\
+TITLE $\longrightarrow$ initTitle noTags endTitle \\
+SCRIPTS $\longrightarrow$ initScript noScripts endScripts MORE\_SCRIPTS \\
+MORE\_SCRIPTS $\longrightarrow$ $\lambda$ $|$ SCRIPTS \\
+BODY $\longrightarrow$ $\lambda$ $|$ initBody LEER\_BODY endBody \\
+LEER\_BODY $\longrightarrow$ $\lambda$ $|$ noTags LEER\_BODY $|$ initDiv LEER\_BODY endDiv LEER\_BODY $|$ \\
+\indent initP LEER\_BODY endP LEER\_BODY $|$ initH1 LEER\_BODY endH1 LEER\_BODY $|$ \\ 
+\indent br LEER\_BODY
