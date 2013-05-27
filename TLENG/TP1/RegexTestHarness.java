@@ -7,14 +7,32 @@ public class RegexTestHarness {
 
     public static void main(String[] args){
         
-    	String regEx = "foo";
-    	String text = "foo";
-    	
-        Pattern pattern = 
-        Pattern.compile(regEx);
+    	//String regEx = "^[(/<html/>)(/<//html/>)(/<head/>)(/<//head/>)(/<body/>)(/<//body/>) (/<title/>)(/<//title/>)(/<script/>)(/<//script/>)(/<div/>)(/<//div/>)(/<h1/>)(/<//h1/>)(/<p/>)(/<//p/>) (/<br>)]";
+    	//String regEx = "(.*?)(^[(<html/>)|(<//html/>)]*)(.*?)";
 
-        Matcher matcher = 
-        pattern.matcher(text);
+    	//String regEx = "([^(<)]*[^(ti)]*>)";
+    	//String text = "pap>a<title>pepe</title>";
+    	
+//    	String regEx = "([^(<)]*[^t]*>)";
+//    	String text = "texto<title>";
+    	
+//    	String regEx = "(([^(<)])*<[^(title)]{1,})";
+//    	String text = "texto<stitle>";
+    	
+//    	String regEx = "^((?!</script>).)*$";
+//    	String text = "wowomy string <script>";
+
+    	String regEx = "^((?!(<script>|</script>)).)*$";
+    	String text = "wowomy script <script /script>";
+    	
+    	// "pepe" -> "pepe"
+    	// "<title>pepe" -> "no match"
+    	// ">pepe" -> ">pepe"
+    	// "<span>" -> "<span>"
+    	// "<span>texto</span>" -> "<span>texto</span>"
+    	
+        Pattern pattern = Pattern.compile(regEx);
+        Matcher matcher = pattern.matcher(text);
 
         boolean found = false;
         while (matcher.find()) {
@@ -29,4 +47,6 @@ public class RegexTestHarness {
         	System.out.printf("No match found.%n");
         }
     }
+    
+    
 }
