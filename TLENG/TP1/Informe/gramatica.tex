@@ -1,11 +1,19 @@
-\noindent BEGIN $\longrightarrow$ initHtml HTML endHtml \\
-HTML $\longrightarrow$ HEAD BODY \\
-HEAD $\longrightarrow$ $\lambda$ $|$ initHead LEER\_HEAD endHead \\
-LEER\_HEAD $\longrightarrow$ SCRIPTS TITLE MORE\_SCRIPTS $|$ TITLE MORE\_SCRIPTS $|$ MORE\_SCRIPTS \\
-TITLE $\longrightarrow$ initTitle noTags endTitle \\
-SCRIPTS $\longrightarrow$ initScript noScripts endScripts MORE\_SCRIPTS \\
-MORE\_SCRIPTS $\longrightarrow$ $\lambda$ $|$ SCRIPTS \\
-BODY $\longrightarrow$ $\lambda$ $|$ initBody LEER\_BODY endBody \\
-LEER\_BODY $\longrightarrow$ $\lambda$ $|$ noTags LEER\_BODY $|$ initDiv LEER\_BODY endDiv LEER\_BODY $|$ \\
-\indent initP LEER\_BODY endP LEER\_BODY $|$ initH1 LEER\_BODY endH1 LEER\_BODY $|$ \\ 
-\indent br LEER\_BODY
+\textit{G} $=$ $\langle${$V_N$, $V_T$, \textit{P}, BEGIN}$\rangle$ donde 
+
+\indent \indent $V_N$ $=$ \{ BEGIN, HTML, HEAD, LEER\_HEAD, TITLE, SCRIPTS, MORE\_SCRIPTS, BODY, LEER\_BODY \} 
+
+\indent \indent $V_T$ $=$ \{ initHtml, endHtml, initHead, endHead, initTitle, endTitle, initScript, endScript, noScripts, initBody, endBody, initDiv, endDiv, initH1, endH1, initP, endP, br, noTags \}
+
+\indent \indent y \textit{P} est\'a dada por: 
+
+  \begin{xlist}{MORE\_SCRIPTS $\longrightarrow$}
+    \item[BEGIN $\longrightarrow$] initHtml HTML endHtml
+    \item[HTML $\longrightarrow$] HEAD BODY
+    \item[HEAD $\longrightarrow$] $\lambda$ $|$ initHead LEER\_HEAD endHead
+    \item[LEER\_HEAD $\longrightarrow$] SCRIPTS TITLE MORE\_SCRIPTS $|$ \\ TITLE MORE\_SCRIPTS $|$ MORE\_SCRIPTS
+    \item[TITLE $\longrightarrow$] initTitle noTags endTitle
+    \item[SCRIPTS $\longrightarrow$] initScript noScripts endScripts MORE\_SCRIPTS
+    \item[MORE\_SCRIPTS $\longrightarrow$] $\lambda$ $|$ initBody LEER\_BODY endBody
+    \item[BODY $\longrightarrow$] $\lambda$ $|$ initBody LEER\_BODY endBody
+    \item[LEER\_BODY $\longrightarrow$] $\lambda$ $|$ noTags LEER\_BODY $|$ br LEER\_BODY $|$ \\ initDiv LEER\_BODY endDiv LEER\_BODY $|$ \\ initP LEER\_BODY endP LEER\_BODY $|$ \\ initH1 LEER\_BODY endH1 LEER\_BODY  
+  \end{xlist}
