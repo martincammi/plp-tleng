@@ -1,0 +1,48 @@
+\begin{center}
+    \begin{tabular}{| l | l | l | p{5cm} |}
+    \hline
+    \textbf{\textit{Terminal}} 	& \textbf{\textit{Expresi\'on regular}} 	\\ \hline
+    initHtml 		& $<$html$>$ 			 \\ \hline
+    endHtml  		& $<$/html$>$  			 \\ \hline
+    initHead		& $<$head$>$ 			 \\ \hline
+    endHead	 	& $<$/head$>$ 			 \\ \hline
+    initBody 		& $<$body$>$ 			 \\ \hline
+    endBody		& $<$/body$>$  			 \\ \hline
+    initTitle 		& $<$title$>$ 			 \\ \hline
+    endTitle  		& $<$/title$>$ 			 \\ \hline
+    initScript		& $<$script$>$ 			 \\ \hline
+    endScript		& $<$/script$>$  			 \\ \hline
+    initDiv		& $<$div$>$ 			 \\ \hline
+    endDiv		&  $<$/div$>$ 			 \\ \hline
+    initH1		& $<$h1$>$ 			 \\ \hline
+    endH1		& $<$/h1$>$  			 \\ \hline
+    initP 		& $<$p$>$ 				 \\ \hline
+    endP 		& $<$/p$>$ 				 \\ \hline
+    br			&$<$br$>$ 				 \\ \hline
+    noTags		& \string^((?!(TAGS\_GRAMATICA)).)*\$  			 \\ \hline
+    noScripts 		&  \string^((?!($<$script$>\vert<$/script$>$)).)*\$		 \\ \hline
+%= ^((?!(<script>$\vert$</script>)).)*$ 
+
+    \end{tabular}
+\end{center}
+
+Donde TAGS\_GRAMATICA $=$ $<$html$>$$\vert$$<$/html$>$$\vert$$<$head$>$$\vert$$<$/head$>$$\vert$$<$body$>$$\vert$$<$/body$>$$\vert$ \\
+\indent \indent $<$title$>$$\vert$$<$/title$>$$\vert$$<$script$>$$\vert$$<$/script$>$$\vert$$<$div$>$
+$\vert$$<$/div$>$$\vert$$<$p$>$$\vert$$<$/p$>$$\vert$$<$h1$>$$\vert$$<$/h1$>$$\vert$$<$br$>$\\
+
+El tag \textit{noTags} se representa con una expresi\'on regular que identifica cualquier texto sin tags definidos por la gram\'atica.\\
+
+
+Por otro lado, la expresi\'on regular para identificar los comentarios es la siguiente:\\
+
+\indent \indent \textit{comment } $=$ $<$!--(.*?)--$>$\\
+
+Los diferentes s\'imbolos utilizados en las expresiones denotan:
+	
+  \begin{xlist}{MORE\_SCRIPTS $\longrightarrow$}
+    \item[$\vert$ $\longrightarrow$] 	Indica disyunci\'on entre dos expresiones.
+    \item[\string^ $\longrightarrow$	]Matchea la expresi\'on al comienzo de una l\'inea. 
+    \item[\$ $\longrightarrow$]		Matchea la expresi\'on al final de una l\'inea. 
+    \item[?! $\longrightarrow$]		No machea la aparici\'on denotada a su derecha.
+    \item[* $\longrightarrow$] 		Indica una repetici\'on de 0 o m\'as veces.
+  \end{xlist}
