@@ -1,0 +1,35 @@
+text → "wowo<ttag> my string"
+
+res → I found the text "wowo<ttag> my string" starting at index 0 and ending at index 20.
+
+text → "wowomy string <tag> ";
+
+res → No match found.
+
+text → “”
+
+res → I found the text "" starting at index 0 and ending at index 0.
+
+text → ‘<tag >’
+
+res → I found the text "<tag >" starting at index 0 and ending at index 6.
+
+text → ‘<tag>’
+
+res → No match found.
+
+text → "<tag> abarajame la bañera <tag>";
+
+res → No match found.
+
+text → " abarajame <tag> la niñera"
+
+res → No match found.
+
+text → " abarajame <<tag> la niñera"
+
+res → No match found.
+
+text → " abarajame <<>tag> la niñera";
+
+res → I found the text " abarajame <<>tag> la niñera" starting at index 0 and ending at index 28.

@@ -12,6 +12,21 @@ public class RegExTest {
 	public static String NO_MATCH = "NoMatch";
 	public static String TAGS_GRAMATICA = "<html>|</html>|<head>|</head>|<body>|</body>|<title>|</title>|<script>|</script>|<div>|</div>|<p>|</p>|<h1>|</h1>|<br>";
 	
+	public String textoSinTags(String texto){
+		return calcularRegular("^((?!(" + TAGS_GRAMATICA + ")).)*$", texto);
+	}
+	
+	public String comments(String texto){
+		return calcularRegular("<!--(.*?)-->", texto);
+	}
+	
+	@Test
+	public void testComments() {
+		//String text = "<html><body><!-- este es un comentario que puede tener <html> cualquier cosa--></body></html>";
+		String text = "<!--hola-->";
+		assertEquals(textoSinTags(text), "hola");
+	}
+	
 	@Test
 	public void testTextoLengthCero() {
 		String text = "";
@@ -181,10 +196,6 @@ public class RegExTest {
 		text = "<head>div</>";
 		assertEquals(textoSinTags(text), NO_MATCH);
 		
-	}
-	
-	public String textoSinTags(String texto){
-		return calcularRegular("^((?!(" + TAGS_GRAMATICA + ")).)*$", texto);
 	}
 	
 	public String calcularRegular(String regEx, String texto){

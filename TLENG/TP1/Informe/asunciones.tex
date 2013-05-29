@@ -1,0 +1,27 @@
+
+A continuaci\'on detallaremos una serie de asunciones que hemos tomado al respecto del trabajo:
+
+\begin{itemize}
+
+\item{  Asumimos que la secci\'on \textbf{head} tiene que ir necesariamente antes que la secci\'on \textbf{body}.
+}
+
+\item{  Asumimos que los tags $<title></title>$ solo puede aparecer una sola vez y el tag $ <script></script>$ puede aparecer varias veces adem\'as de que ambos son opcionales y pueden estar en cualquier orden.
+}
+
+\item{  Asumimos que dentro de la secci\'on \textbf{title} puede haber cualquier texto sin tags definidos por el lenguaje.
+}
+
+\item{  Asumimos que dentro de la secci\'on \textbf{script} no pueden contener otras subsecciones \textbf{script}
+}
+
+\item{  Asumimos que los espacios entre tags son inicialmente filtrados por el analizador l\'exico y que no llegan a la gram\'atica as\'i como tambi\'en los tags de comentarios.
+}
+
+\item{  Asumimos en las \textbf{regular expressions} que los nombres de los tags son todos en min\'usculas y sin ning\'un espacio.
+}
+
+\item{  En los gr\'aficos de \'arboles de derivaci\'on los ejemplos se basan en c\'odigo de html para mejor legibilidad, pero en realidad la derivaci\'on se realizar\'a en base a los tokens traducidos por el analizador l\'exico.
+}
+
+\end{itemize}
