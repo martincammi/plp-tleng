@@ -26,10 +26,11 @@ testdh6(N) :- distanciaHamming([plp],[plp],N).
 %distPref([X|XS], [Y|YS], N) :- entre(0,1,X), entre(0,1,V), Y is V, X=\=Y, length(YS,LYS), length(XS,LXS), N is (LYS + LXS + 2).
 
 %ideas
-%distPref(XS, YS,N) :- length(YS,0), length(XS,N).%binaria(XS), length(XS,N). 
-%distPref([], YS,N) :- desde(0,M), binaria(YS, M), N is M.
-%distPref([X|XS], [Y|YS], N) :- entre(0,1,X), entre(0,1,V), Y is V, X==Y, distPref(XS, YS, N).
-%distPref([X|XS], [Y|YS], N) :- entre(0,1,X), entre(0,1,V), Y is V, X=\=Y, distPref(XS, YS, M), N is (M + 2).
+distPref(XS, YS,N) :- ground(YS), length(YS,0), length(XS,N).%binaria(XS), length(XS,N).
+distPref([], YS, N) :- ground(YS), length(YS, N),!.
+distPref([], [Y|YS], N) :- ground(Y), distPref([], YS, M), N is (M + 1). 
+distPref([], YS,N) :- desde(0,M), binaria(YS, M), N is M.
+distPref([X|XS], [Y|YS], N) :- entre(0,1,X), distPref(XS, YS, M), entre(0,1,V), Y is V, N is (M + abs(X - Y)*2).
 
 %distPref([], YS,N) :- length(YS,N). %binaria(YS), length(YS,N).
 %distPref(XS, [],N) :- length(XS,N).%binaria(XS), length(XS,N). 
