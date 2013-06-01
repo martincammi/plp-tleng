@@ -33,8 +33,8 @@ distPref([X|XS], [Y|YS], N) :- entre(0,1,X), entre(0,1,V), Y is V, X=\=Y, length
 %genBinaria(?L,+N)
 %binaria([], 0).
 %binaria([X|XS], N) :- length([X|XS],LengthLista), LengthLista<=N, entre(0,1,X), K is N-1, binaria(XS,K).
-binaria([], 0).
-binaria([Y|YS], N) :- entre(0,1,V), Y is V, binaria(YS,ACUM), N is (ACUM + 1).
+binaria([], 0) :- !.
+binaria([Y|YS], N) :- entre(0,1,V), Y is V, ACUM is (N - 1), binaria(YS,ACUM).
 
 %desde(+X,-Y)
 %desde(X,X).
