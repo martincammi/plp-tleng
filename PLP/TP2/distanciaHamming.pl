@@ -25,10 +25,10 @@ testdh6(N) :- distanciaHamming([plp],[plp],N).
 %distPref([X|XS], [Y|YS], N) :- entre(0,1,X), X==Y, distPref(XS, YS, N).
 %distPref([X|XS], [Y|YS], N) :- entre(0,1,X), entre(0,1,V), Y is V, X=\=Y, length(YS,LYS), length(XS,LXS), N is (LYS + LXS + 2).
 
-distPref([], YS,N) :- length(YS,N). %binaria(YS), length(YS,N).
+distPref([], YS,N) :- desde(0,M), binaria(YS, M), N is M.
 distPref(XS, [],N) :- length(XS,N).%binaria(XS), length(XS,N). 
 distPref([X|XS], [Y|YS], N) :- entre(0,1,X), entre(0,1,V), Y is V, X==Y, distPref(XS, YS, N).
-distPref([X|XS], [Y|YS], N) :- entre(0,1,X), entre(0,1,V), Y is V, X=\=Y, length(YS,LYS), length(XS,LXS), N is (LYS + LXS + 2).
+distPref([X|XS], [Y|YS], N) :- entre(0,1,X), entre(0,1,V), Y is V, X=\=Y, distPref(XS, YS, M), N is (M + 2).
 
 %genBinaria(?L,+N)
 %binaria([], 0).
@@ -37,7 +37,7 @@ binaria([], 0) :- !.
 binaria([Y|YS], N) :- entre(0,1,V), Y is V, ACUM is (N - 1), binaria(YS,ACUM).
 
 %desde(+X,-Y)
-%desde(X,X).
-%desde(X,Y) :- Z is X+1, desde(Z,Y).
+desde(X,X).
+desde(X,Y) :- Z is X+1, desde(Z,Y).
 
 %testdp1(N) :- distPref([0,1,1],[0,1,1,1],N).
