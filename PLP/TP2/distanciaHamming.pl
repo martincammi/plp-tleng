@@ -42,7 +42,7 @@ distPref([],YS,N) :- ground(YS), length(YS,N), binaria(YS,N). %1
 distPref([],YS,N) :- not(ground(YS)), binaria(YS,N). %3 
 distPref(XS, [],N):- length(XS,N), N>0, binaria(XS,N). %4	
 distPref([X|XS],[Y|YS],N) :- entre(0,1,X), entre(0,1,Y), X==Y, distPref(XS,YS,N). %5
-distPref([X|XS],[Y|YS],N) :- entre(0,1,X), entre(0,1,Y), X=\=Y,     ground(YS),  length(XS,LengthXS), length(YS,LengthYS), 	N is (LengthXS+LengthYS+2). %6
+distPref([X|XS],[Y|YS],N) :- entre(0,1,X), entre(0,1,Y), X=\=Y,     ground(YS),  length(XS,LengthXS), binaria(XS,LengthXS), length(YS,LengthYS), binaria(YS, LengthYS),	N is (LengthXS+LengthYS+2). %6
 distPref([X|XS],[Y|YS],N) :- entre(0,1,X), entre(0,1,Y), X=\=Y, not(ground(YS)), length(XS,LengthXS), ACUM is (N-LengthXS-2), distPref([],YS,ACUM).	%8		  
 
 
