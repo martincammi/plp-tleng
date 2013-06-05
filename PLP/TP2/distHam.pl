@@ -1,6 +1,4 @@
 
-[utils].
-
 %distHam(+L1, ?L2, ?D)
 distHam([], [], 0).
 distHam([X|XS], [Y|YS], N) :- entre(0,1,V), Y is V, distHam(XS,YS,ACUM), N is ACUM + abs(Y-X).
