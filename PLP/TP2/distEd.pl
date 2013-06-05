@@ -27,6 +27,20 @@ distEd([X|XS],[Y|YS],D) :- length([X|XS], LengthX), binaria([X|XS],LengthX),
 			   distEd(XS,[Y|YS],Agregar),  NewAgregar      is (Agregar + 1),		%agrego elemento
 			   minimo(NewIntercambiar,NewEliminar,NewAgregar,D).
 
+testEd1(N) :- distEd([1],[],N).
+testEd2(N) :- distEd([],[1],N).
+testEd3(N) :- distEd([1],[1],N).
+testEd4(N) :- distEd([],[],N).
+testEd5(N) :- distEd([1,0,1],[1,1],N).
+testEd6(N) :- distEd([1,0],[1,1,0],N).
+testEd7(X,N) :- distEd([1,0,1],[X,0,1],N).
+testEd8(X,N) :- distEd([1,0,1],[X,0,X,1,0],N).
+testEd9(Y,X,N) :- distEd([1,0,0,1,1],[X,0,Y],N).
+testEd10(Y) :- distEd([0,0,0],Y,2).
+testEd11(Y,N) :- distEd([0,0,0],Y,N).
+testEd12(Y,N) :- distEd([0,0,0],[0|Y],N).
+testEd13(Y,N) :- distEd([0,0,0],[1|Y],N).
+testEd14(Y,X,N) :- distEd([0,0,0],[1,X|Y],N).
 			   
 			   
 %entre(+X, +Y, -Z)
