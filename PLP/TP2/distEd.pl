@@ -21,6 +21,8 @@ distEd([X|XS],[Y|YS],D) :- length([X|XS], LengthX), binaria([X|XS],LengthX),
 			   distEd(XS,[Y|YS],Agregar),  NewAgregar      is (Agregar + 1),		%agrego elemento
 			   minimo(NewIntercambiar,NewEliminar,NewAgregar,D).
 
+			   
+			   
 %entre(+X, +Y, -Z)
 entre(X,Y,X) :- X=<Y.
 entre(X,Y,Z) :- X<Y, Xm1 is X+1, entre(Xm1, Y, Z).
