@@ -10,7 +10,13 @@
 %distPref(X,Y,N) :- not(is_list(Y)), not(ground(N)), desde(0,N), distPref(X,Y,N). 
 %distPref([],YS,N) :- not(is_list(YS)), ground(N), binaria(YS,N).
 
-distEd(S,T,D)  :- not(is_list(T)), desde(0,LengthT), binaria(T,LengthT), distEd(S,T,D). %defino la lista T a usar (SE CUELGA CUANDO ENCONTRE TODAS LAS SOLUCIONES!)
+distEd(S,T,D)  :- not(is_list(T)), not(ground(D)), desde(0,LengthT), binaria(T,LengthT), distEd(S,T,D). %defino la lista T a usar (SE CUELGA CUANDO ENCONTRE TODAS LAS SOLUCIONES!)
+distEd(S,T,D)  :- 	not(is_list(T)), ground(D), 
+					length(S,LengthS), 
+					MaxCantOperaciones is LengthS + D, 
+					entre(0,MaxCantOperaciones,LengthT),
+					binaria(T,LengthT), 
+					distEd(S,T,D). %acoto la cantidad max de operaciones!!!
 distEd([],T,D) :- length(T,D), binaria(T,D).
 distEd(S,[],D) :- length(S,D), D>0, binaria(S,D). %D>0 para evitar duplicados en caso [] []
 distEd([X|XS],[Y|YS],D) :- length([X|XS], LengthX), binaria([X|XS],LengthX),
