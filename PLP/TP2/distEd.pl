@@ -1,5 +1,7 @@
 
+:- [utils].
 
+%---EJECRICIOS---
 
 %distEd(+S,?T,?D)
 %caso infinitas soluciones: sanitizamos S e instanciamos todas las posibles listas T,
@@ -31,19 +33,6 @@ distEd([X|XS],[Y|YS],D) :- length([X|XS], LengthX), binaria([X|XS],LengthX),
 			   distEd([X|XS],YS,Eliminar), NewEliminar     is (Eliminar + 1),		%elimino elemento
 			   distEd(XS,[Y|YS],Agregar),  NewAgregar      is (Agregar + 1),		%agrego elemento
 			   minimo(NewIntercambiar,NewEliminar,NewAgregar,D).				%calculo el minimo
-
-%entre(+X, +Y, -Z)
-entre(X,Y,X) :- X=<Y.
-entre(X,Y,Z) :- X<Y, Xm1 is X+1, entre(Xm1, Y, Z).
-
-%Genera todas las listas binarias de longitud N, si L esta instanciada, verifica que sea binaria
-%Binaria(?L,+N)
-binaria([], 0).
-binaria([Y|YS], N) :- entre(0,1,V), Y is V, ACUM is (N - 1), ACUM >= 0, binaria(YS,ACUM).
-
-%desde(+X,-Y)
-desde(X,X).
-desde(X,Y) :- Z is X+1, desde(Z,Y).
 
 %calcula el minimo						
 minimo(A,B,C,Res) :- A<B, minimoAux(A,C,Res).

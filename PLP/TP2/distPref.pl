@@ -1,6 +1,10 @@
 
+:- [utils]. 
+
 %Corre todos los tests.
 testAllPref :- test1, test2, test3, test4, test5, test6.
+
+%---EJECRICIOS---
 
 %distPref(+L1, ?L2, ?D)
 % caso infinito, sin n definido genero todos los posibles Ns
@@ -23,18 +27,6 @@ distPref([X|XS],[Y|YS],N) :- is_list(YS), entre(0,1,X), entre(0,1,Y),
 				binaria(XS,LengthXS), 
 				binaria(YS,LengthYS), 
 				N is (LengthYS+LengthXS+2).
-
-%entre(+X, +Y, -Z)
-entre(X,Y,X) :- X=<Y.
-entre(X,Y,Z) :- X<Y, Xm1 is X+1, entre(Xm1, Y, Z).
-
-%Binaria(?L,+N)
-binaria([], 0).
-binaria([Y|YS], N) :- entre(0,1,V), Y is V, ACUM is (N - 1), ACUM >= 0, binaria(YS,ACUM).
-
-%desde(+X,-Y)
-desde(X,X).
-desde(X,Y) :- Z is X+1, desde(Z,Y).
 
 %---TESTS---
 

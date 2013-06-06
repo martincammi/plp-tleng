@@ -1,76 +1,62 @@
 
+:- [utils]. 
+
+%Corre todos los tests.
+testAllHam :- test1Ham, test2Ham, test3Ham, test4Ham, test5Ham, test6Ham.
+
+%---EJERCICIOS---
+
 %distHam(+L1, ?L2, ?D)
 distHam([], [], 0).
 distHam([X|XS], [Y|YS], N) :- entre(0,1,X), entre(0,1,V), Y is V, distHam(XS,YS,ACUM), N is ACUM + abs(Y-X).
 
-%entre(+X, +Y, -Z)
-entre(X,Y,X) :- X=<Y.
-entre(X,Y,Z) :- X<Y, Xm1 is X+1, entre(Xm1, Y, Z).
-
-%Binaria(?L,+N)
-binaria([], 0).
-binaria([Y|YS], N) :- entre(0,1,V), Y is V, ACUM is (N - 1), ACUM >= 0, binaria(YS,ACUM).
-
-%desde(+X,-Y)
-desde(X,X).
-desde(X,Y) :- Z is X+1, desde(Z,Y).
-
+%---TESTS---
 
 %Tests de instanciación de X
-testDh8A(X) :- distHam([0,1,0],X,2), member(X,[[1,0,0]]),!.
-testDh8B(X) :- distHam([0,1,0],X,2), member(X,[[0,0,1]]),!.
-testDh8C(X) :- distHam([0,1,0],X,2), member(X,[[1,1,1]]),!.
+test1Ham :- var(A1), var(B1), var(C1),
+	 call(testDh1A(A1)), call(testDh1B(B1)), call(testDh1C(C1)).
+testDh1A(X) :- distHam([0,1,0],X,2), member(X,[[1,0,0]]),!.
+testDh1B(X) :- distHam([0,1,0],X,2), member(X,[[0,0,1]]),!.
+testDh1C(X) :- distHam([0,1,0],X,2), member(X,[[1,1,1]]),!.
+
 %Tests de instanciación de X (segunda lista semi instanciada)
-testDh8D(X) :- distHam([0,1,0],[1|X],2), member(X,[[0,0]]),!.
-testDh8E(X) :- distHam([0,1,0],[1|X],2), member(X,[[1,1]]),!.
-testDh8F(X) :- distHam([0,1,0],[0,1,0|X],0), member(X,[[]]),!.
-testDh8G(X) :- not(distHam([0,1,0],[1,0,0,0|X],2)).
+test2Ham :- var(A2), var(B2), var(C2), var(D2),
+	 call(testDh2A(A2)), call(testDh2B(B2)), call(testDh2C(C2)), call(testDh2D(D2)).
+testDh2A(X) :- distHam([0,1,0],[1|X],2), member(X,[[0,0]]),!.
+testDh2B(X) :- distHam([0,1,0],[1|X],2), member(X,[[1,1]]),!.
+testDh2C(X) :- distHam([0,1,0],[0,1,0|X],0), member(X,[[]]),!.
+testDh2D(X) :- not(distHam([0,1,0],[1,0,0,0|X],2)).
 
 %Tests de instanciación de Y y N
-testDh0A(Y,N) :- distHam([0,0],Y,N), member(Y, [[0,0]]), N is 0, !.
-testDh1B(Y,N) :- distHam([0,0],Y,N), member(Y, [[0,1]]), N is 1, !.
-testDh2C(Y,N) :- distHam([0,0],Y,N), member(Y, [[1,0]]), N is 1, !.
+test3Ham :- var(A3), var(B3), var(C3), var(D3), var(A31), var(B31), var(C31), var(D31),
+	 call(testDh3A(A3, A31)), call(testDh3B(B3, B31)), call(testDh3C(C3, C31)), call(testDh3D(D3, D31)).
+testDh3A(Y,N) :- distHam([0,0],Y,N), member(Y, [[0,0]]), N is 0, !.
+testDh3B(Y,N) :- distHam([0,0],Y,N), member(Y, [[0,1]]), N is 1, !.
+testDh3C(Y,N) :- distHam([0,0],Y,N), member(Y, [[1,0]]), N is 1, !.
 testDh3D(Y,N) :- distHam([0,0],Y,N), member(Y, [[1,1]]), N is 2, !.
 
 %Tests de instanciación de N
-testDh5A(N) :- distHam([0,1],[0,1],N), N is 0,!.
-testDh6A(N) :- distHam([0,1,0],[0,0,1],N), N is 2,!.
+test4Ham :- var(A4), var(B4),
+	 call(testDh4A(A4)), call(testDh4B(B4)).
+testDh4A(N) :- distHam([0,1],[0,1],N), N is 0,!.
+testDh4B(N) :- distHam([0,1,0],[0,0,1],N), N is 2,!.
 
 %Tests de instanciación de N (entradas invalidas)
-testDh4A(N) :- not(distHam([],[0],N)), !.
-testDh4B(N) :- not(distHam([0],[],N)), !.
-testDh4C :- not(distHam([],[],4)).
-testDh4D(N) :- not(distHam([plp],[plp],N)).
-testDh4E(N) :- not(distHam([1,8],[1,0],N)).
-testDh4F(N) :- not(distHam([1,0],[1,5],N)).
+test5Ham :- var(A5), var(B5), var(D5), var(E5), var(F5),
+	 call(testDh5A(A5)), call(testDh5B(B5)), call(testDh5C), call(testDh5D(D5)),
+	 call(testDh5E(E5)), call(testDh5F(F5)).
+testDh5A(N) :- not(distHam([],[0],N)), !.
+testDh5B(N) :- not(distHam([0],[],N)), !.
+testDh5C :- not(distHam([],[],4)).
+testDh5D(N) :- not(distHam([plp],[plp],N)).
+testDh5E(N) :- not(distHam([1,8],[1,0],N)).
+testDh5F(N) :- not(distHam([1,0],[1,5],N)).
 
 %Tests de instanciación de X, Y y N
-testDh7A(X,Y,N) :- distHam([0,1,0],[X,Y,1],N), X is 0, Y is 0, N is 2, !.
-testDh7B(X,Y,N) :- distHam([0,1,0],[X,Y,1],N), X is 0, Y is 1, N is 1, !.
-testDh7C(X,Y,N) :- distHam([0,1,0],[X,Y,1],N), X is 1, Y is 0, N is 3, !.
-testDh7D(X,Y,N) :- distHam([0,1,0],[X,Y,1],N), X is 1, Y is 1, N is 2, !.
+test6Ham :- var(A6), var(B6), var(C6), var(D6), var(A61), var(B61), var(C61), var(D61), var(A62), var(B62), var(C62), var(D62),
+	 call(testDh6A(A6, A61, A62)), call(testDh6B(B6, B61, B62)), call(testDh6C(C6, C61, C62)), call(testDh6D(D6, D61, D62)).
+testDh6A(X,Y,N) :- distHam([0,1,0],[X,Y,1],N), X is 0, Y is 0, N is 2, !.
+testDh6B(X,Y,N) :- distHam([0,1,0],[X,Y,1],N), X is 0, Y is 1, N is 1, !.
+testDh6C(X,Y,N) :- distHam([0,1,0],[X,Y,1],N), X is 1, Y is 0, N is 3, !.
+testDh6D(X,Y,N) :- distHam([0,1,0],[X,Y,1],N), X is 1, Y is 1, N is 2, !.
 
-
-testAll :- 	call(testDh0A(Y1,N1)),
-			call(testDh1B(Y2,N2)),
-			call(testDh2C(Y3,N3)),
-			call(testDh3D(Y4,N4)),
-			call(testDh4A(N5)),
-			call(testDh4B(N6)),
-			call(testDh4C),
-			call(testDh4D(N13)),
-			call(testDh4E(N14)),
-			call(testDh4F(N15)),
-			call(testDh5A(N7)),
-			call(testDh6A(N8)),
-			call(testDh7A(X9,Y9,N9)),
-			call(testDh7B(X10,Y10,N10)),
-			call(testDh7C(X11,Y11,N11)),
-			call(testDh7D(X12,Y12,N12)),
-			call(testDh8A(N13)),
-			call(testDh8B(N14)),
-			call(testDh8C(N15)),
-			call(testDh8D(N21)),
-			call(testDh8D(N22)),
-			call(testDh8F(N23)),
-			call(testDh8G(N24)).
