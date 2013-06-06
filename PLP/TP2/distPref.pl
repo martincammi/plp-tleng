@@ -1,15 +1,25 @@
 
 %distPref(+L1, ?L2, ?D)
 % caso infinito, sin n definido genero todos los posibles Ns
-distPref(X,Y,N) :- not(is_list(Y)), not(ground(N)), desde(0,N), distPref(X,Y,N). 
+distPref(X,Y,N) :- not(is_list(Y)), not(ground(N)), 
+			length(X,LengthX), binaria(X,LengthX), 
+			desde(0,N), distPref(X,Y,N). 
 distPref([],YS,N) :- not(is_list(YS)), ground(N), binaria(YS,N).
 distPref([X|XS],[Y|YS],N) :- not(is_list(YS)), ground(N), entre(0,1,X), entre(0,1,Y), X==Y, distPref(XS,YS,N).
 distPref([X|XS],[Y|YS],N) :- not(is_list(YS)), ground(N), entre(0,1,X), entre(0,1,Y), X=\=Y, length(XS,LengthXS), binaria(XS,LengthXS), ACUM is (N-LengthXS-2), distPref([],YS,ACUM).	
 % caso finito
 distPref([],YS,N) :- is_list(YS), length(YS,N), binaria(YS,N).
-distPref(XS, [],N):- length(XS,N), N>0, binaria(XS,N). %el N>0 es para no entrar en el caso [] [] por la linea de arriba y esta.
-distPref([X|XS],[Y|YS],N) :- is_list(YS), entre(0,1,X), entre(0,1,Y), X==Y,  distPref(XS,YS,N).
-distPref([X|XS],[Y|YS],N) :- is_list(YS), entre(0,1,X), entre(0,1,Y), X=\=Y, length(YS,LengthYS), length(XS,LengthXS), binaria(XS,LengthXS), binaria(YS,LengthYS), N is (LengthYS+LengthXS+2).
+distPref(XS, [],N):- length(XS,N), N>0, binaria(XS,N). %el N>0 es para no entrar en el caso [] [] por la linea de arriba tbm.
+distPref([X|XS],[Y|YS],N) :- is_list(YS), entre(0,1,X), entre(0,1,Y), 
+				X==Y,  
+				distPref(XS,YS,N).
+distPref([X|XS],[Y|YS],N) :- is_list(YS), entre(0,1,X), entre(0,1,Y), 
+				X=\=Y, 
+				length(YS,LengthYS), 
+				length(XS,LengthXS), 
+				binaria(XS,LengthXS), 
+				binaria(YS,LengthYS), 
+				N is (LengthYS+LengthXS+2).
 
 %entre(+X, +Y, -Z)
 entre(X,Y,X) :- X=<Y.
