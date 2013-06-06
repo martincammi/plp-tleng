@@ -1,4 +1,6 @@
 
+%distHam.pl
+
 :- [utils]. 
 
 %Corre todos los tests.

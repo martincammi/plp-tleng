@@ -1,4 +1,6 @@
 
+%distPref.pl
+
 :- [utils]. 
 
 %Corre todos los tests.

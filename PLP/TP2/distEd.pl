@@ -1,4 +1,6 @@
 
+%distEd.pl
+
 :- [utils].
 
 %Corre todos los tests.
