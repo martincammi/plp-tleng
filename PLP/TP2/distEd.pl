@@ -35,10 +35,23 @@ testAll :- call(testEd1(N1)), call(testEd2(N2)), call(testEd3(N3)), call(testEd4
 	   call(testEd8(N8A, N8B)),
 	   call(testEd9A(N9A1, N9A2)), call(testEd9B(N9B1, N9B2)),
    	   call(testEd10A(N10A1, N10A2)), call(testEd10B(N10B1, N10B2)), call(testEd10C(N10C1, N10C2)), call(testEd10D(N10D1, N10D2)),
+
 	   call(testEd11A(N11A1, N11A2)), call(testEd11B(N11B1, N11B2)), call(testEd11C(N11C1, N11C2)), call(testEd11D(N11D1, N11D2)),
 	   call(testEd11E(N11E1, N11E2)), call(testEd11F(N11F1, N11F2)), call(testEd11G(N11G1, N11G2)), call(testEd11H(N11H1, N11H2)),
-	   call(testEd11I(N11I1, N11I2)), call(testEd11J(N11J1, N11J2)), call(testEd11K(N11K1, N11K2)).
-	   %call(testEd10(N10)).
+	   call(testEd11I(N11I1, N11I2)), call(testEd11J(N11J1, N11J2)), call(testEd11K(N11K1, N11K2)),
+
+	   call(testEd12A(N12A1, N12A2)), call(testEd12B(N12B1, N12B2)), call(testEd12C(N12C1, N12C2)), call(testEd12D(N12D1, N12D2)),
+	   call(testEd12E(N12E1, N12E2)), call(testEd12F(N12F1, N12F2)), call(testEd12G(N12G1, N12G2)), call(testEd12H(N12H1, N12H2)),
+	   call(testEd12I(N12I1, N12I2)), call(testEd12J(N12J1, N12J2)), call(testEd12K(N12K1, N12K2)),
+
+   	   call(testEd13A(N13A1, N13A2, N13A3)), call(testEd13B(N13B1, N13B2, N13B3)), call(testEd13C(N13C1, N13C2, N13C3)), 
+	   call(testEd13D(N13D1, N13D2, N13D3)),
+
+ 	   call(testEd14A(N14A1, N14A2, N14A3)), call(testEd14B(N14B1, N14B2, N14B3)), call(testEd14C(N14C1, N14C2, N14C3)),
+	   call(testEd14D(N14D1, N14D2, N14D3)), call(testEd14E(N14E1, N14E2, N14E3)), call(testEd14F(N14F1, N14F2, N14F3)), 
+	   call(testEd14G(N14G1, N14G2, N14G3)), call(testEd14H(N14H1, N14H2, N14H3)), call(testEd14I(N14I1, N14I2, N14I3)), 
+	   call(testEd14J(N14J1, N14J2, N14J3)), call(testEd14K(N14K1, N14K2, N14K3)).
+
 
 %Tests de instanciación de N
 testEd1(N) :- distEd([],[],N), N is 0.
@@ -91,8 +104,23 @@ testEd12J(Y,N) :- distEd([0,0,0],[1|Y],N), member(Y, [[0,1,0]]), N is 2, !.
 testEd12K(Y,N) :- distEd([0,0,0],[1|Y],N), member(Y, [[0,1,1]]), N is 3, !.
 
 %Tests de instanciación de X, Y y N
-testEd13(Y,X,N) :- distEd([1,0,0,1,1],[X,0,Y],N), X is 0, Y is 0, N is 3.
-testEd14(Y,X,N) :- distEd([0,0,0],[1,X|Y],N).
+testEd13A(Y,X,N) :- distEd([1,0,0,1,1],[X,0,Y],N), X is Y, Y is 0, N is 3.
+testEd13B(Y,X,N) :- distEd([1,0,0,1,1],[X,0,Y],N), X is 0, Y is 1, N is 2.
+testEd13C(Y,X,N) :- distEd([1,0,0,1,1],[X,0,Y],N), X is 1, Y is 0, N is 2.
+testEd13D(Y,X,N) :- distEd([1,0,0,1,1],[X,0,Y],N), X is Y, Y is 1, N is 2.
+
+
+testEd14A(Y,X,N) :- distEd([0,0,0],[1,X|Y],N), X is 0, member(Y, [[]]), N is 2, !.
+testEd14B(Y,X,N) :- distEd([0,0,0],[1,X|Y],N), X is 1, member(Y, [[]]), N is 3, !.
+testEd14D(Y,X,N) :- distEd([0,0,0],[1,X|Y],N), X is 0, member(Y, [[0]]), N is 1, !.
+testEd14C(Y,X,N) :- distEd([0,0,0],[1,X|Y],N), X is 0, member(Y, [[1]]), N is 2, !.
+testEd14E(Y,X,N) :- distEd([0,0,0],[1,X|Y],N), X is 1, member(Y, [[0]]), N is 2, !.
+testEd14F(Y,X,N) :- distEd([0,0,0],[1,X|Y],N), X is 1, member(Y, [[1]]), N is 3, !.
+testEd14G(Y,X,N) :- distEd([0,0,0],[1,X|Y],N), X is 0, member(Y, [[0,0]]), N is 1, !.
+testEd14H(Y,X,N) :- distEd([0,0,0],[1,X|Y],N), X is 0, member(Y, [[0,1]]), N is 2, !.
+testEd14I(Y,X,N) :- distEd([0,0,0],[1,X|Y],N), X is 0, member(Y, [[1,0]]), N is 2, !.
+testEd14J(Y,X,N) :- distEd([0,0,0],[1,X|Y],N), X is 0, member(Y, [[1,1]]), N is 3, !.
+testEd14K(Y,X,N) :- distEd([0,0,0],[1,X|Y],N), X is 1, member(Y, [[0,0]]), N is 2, !.
 
 			   
 %entre(+X, +Y, -Z)
