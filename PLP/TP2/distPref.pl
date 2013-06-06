@@ -25,7 +25,6 @@ distPref([X|XS],[Y|YS],N) :- is_list(YS), entre(0,1,X), entre(0,1,Y),
 entre(X,Y,X) :- X=<Y.
 entre(X,Y,Z) :- X<Y, Xm1 is X+1, entre(Xm1, Y, Z).
 
-%1 si la lista no instanciada ya tiene una longitud fija, cortamos al superar la cota del resultado.
 %Binaria(?L,+N)
 binaria([], 0).
 binaria([Y|YS], N) :- entre(0,1,V), Y is V, ACUM is (N - 1), ACUM >= 0, binaria(YS,ACUM).
@@ -65,12 +64,6 @@ testPref8A(X,N) :- distPref([1,0,1],[X,0,1],N), X is 1, N is 0.
 testPref8B(X,N) :- distPref([1,0,1],[X,0,1],N), X is 1, N is 6. 
 testPref9A(X,N) :- distPref([1,0,1],[X,0,X,1,0],N), X is 1, N is 2.
 testPref9B(X,N) :- distPref([1,0,1],[X,0,X,1,0],N), X is 0, N is 8.
-
-%Tests de instanciación de listas Y y N
-
-%Tests de instanciación de colas de listas Y y N
-
-%Tests de instanciación de X, Y y N
 
 
 
