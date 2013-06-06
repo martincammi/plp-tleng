@@ -29,8 +29,30 @@ distEd([X|XS],[Y|YS],D) :- length([X|XS], LengthX), binaria([X|XS],LengthX),
 			   distEd(XS,[Y|YS],Agregar),  NewAgregar      is (Agregar + 1),		%agrego elemento
 			   minimo(NewIntercambiar,NewEliminar,NewAgregar,D).				%calculo el minimo
 
-%Corre todos los tests.
-testAll :- var(N1),var(N2),var(N3),var(N4),var(N5),var(N6),var(N7A),var(N7B),var(N8A),var(N8B),var(N9A1),var(N9A2),var(N9B1),var(N9B2),
+%entre(+X, +Y, -Z)
+entre(X,Y,X) :- X=<Y.
+entre(X,Y,Z) :- X<Y, Xm1 is X+1, entre(Xm1, Y, Z).
+
+%Genera todas las listas binarias de longitud N, si L esta instanciada, verifica que sea binaria
+%Binaria(?L,+N)
+binaria([], 0).
+binaria([Y|YS], N) :- entre(0,1,V), Y is V, ACUM is (N - 1), ACUM >= 0, binaria(YS,ACUM).
+
+%desde(+X,-Y)
+desde(X,X).
+desde(X,Y) :- Z is X+1, desde(Z,Y).
+
+%calcula el minimo						
+minimo(A,B,C,Res) :- A<B, minimoAux(A,C,Res).
+minimo(A,B,C,Res) :- A>B, minimoAux(B,C,Res).
+minimo(A,B,C,Res) :- A=B, minimoAux(A,C,Res).
+
+minimoAux(C,D,Res) :- C<D, Res is C.
+minimoAux(C,D,Res) :- C>D, Res is D.
+minimoAux(C,D,Res) :- C=D, Res is C.
+
+%Todos los tests.
+testAllEd :- var(N1),var(N2),var(N3),var(N4),var(N5),var(N6),var(N7A),var(N7B),var(N8A),var(N8B),var(N9A1),var(N9A2),var(N9B1),var(N9B2),
 	   var(N10A1),var(N10A2),var(N10B1),var(N10B2),var(N10C1),var(N10C2),var(N10D1),var(N10D2),var(N11A1),var(N11A2),var(N11B1),var(N11B2),
 	   var(N11C1),var(N11C2),var(N11D1),var(N11D2),var(N11E1),var(N11E2),var(N11F1),var(N11F2),var(N11G1),var(N11G2),var(N11H1),var(N11H2),
 	   var(N11I1),var(N11I2),var(N11J1),var(N11J2),var(N11K1),var(N11K2),var(N12A1),var(N12A2),var(N12B1),var(N12B2),var(N12C1),var(N12C2),
@@ -78,17 +100,18 @@ testEd7B(Y) :- distEd([0,0,0],Y,2), member(Y, [[1,0,1]]).
 testEd7C(Y) :- distEd([0,0,0],Y,2), member(Y, [[0,1,1]]).
 testEd7D(Y) :- distEd([0,0,0],Y,2), member(Y, [[0]]).
 
-%Tests de instanciación de X y N
+%Tests de instanciación de elementos X y N
 testEd8(X,N) :- distEd([1,0,1],[X,0,1],N), N is 0, X is 1.
 testEd9A(X,N) :- distEd([1,0,1],[X,0,X,1,0],N), X is 1, N is 2.
 testEd9B(X,N) :- distEd([1,0,1],[X,0,X,1,0],N), X is 0, N is 3.
 
-%Tests de instanciación de Y y N
+%Tests de instanciación de listas Y y N
 testEd10A(Y,N) :- distEd([0,0,0],Y,N), member(Y, [[0]]), N is 2, !.
 testEd10B(Y,N) :- distEd([0,0,0],Y,N), member(Y, [[1]]), N is 3,!.
 testEd10C(Y,N) :- distEd([0,0,0],Y,N), member(Y, [[0,0]]), N is 1,!.
 testEd10D(Y,N) :- distEd([0,0,0],Y,N), member(Y, [[0,1]]), N is 2,!.
 
+%Tests de instanciación de colas de listas Y y N
 testEd11A(Y,N) :- distEd([0,0,0],[0|Y],N), member(Y, [[]]), N is 2, !.
 testEd11B(Y,N) :- distEd([0,0,0],[0|Y],N), member(Y, [[0]]), N is 1, !.
 testEd11C(Y,N) :- distEd([0,0,0],[0|Y],N), member(Y, [[1]]), N is 2, !.
@@ -100,7 +123,6 @@ testEd11H(Y,N) :- distEd([0,0,0],[0|Y],N), member(Y, [[0,0,0]]), N is 1, !.
 testEd11I(Y,N) :- distEd([0,0,0],[0|Y],N), member(Y, [[0,0,1]]), N is 1, !.
 testEd11J(Y,N) :- distEd([0,0,0],[0|Y],N), member(Y, [[0,1,0]]), N is 1, !.
 testEd11K(Y,N) :- distEd([0,0,0],[0|Y],N), member(Y, [[0,1,1]]), N is 2, !.
-
 
 testEd12A(Y,N) :- distEd([0,0,0],[1|Y],N), member(Y, [[]]), N is 3, !.
 testEd12B(Y,N) :- distEd([0,0,0],[1|Y],N), member(Y, [[0]]), N is 2, !.
@@ -134,25 +156,5 @@ testEd14J(Y,X,N) :- distEd([0,0,0],[1,X|Y],N), X is 0, member(Y, [[1,1]]), N is 
 testEd14K(Y,X,N) :- distEd([0,0,0],[1,X|Y],N), X is 1, member(Y, [[0,0]]), N is 2, !.
 
 			   
-%entre(+X, +Y, -Z)
-entre(X,Y,X) :- X=<Y.
-entre(X,Y,Z) :- X<Y, Xm1 is X+1, entre(Xm1, Y, Z).
 
-%Genera todas las listas binarias de longitud N, si L esta instanciada, verifica que sea binaria
-%Binaria(?L,+N)
-binaria([], 0).
-binaria([Y|YS], N) :- entre(0,1,V), Y is V, ACUM is (N - 1), ACUM >= 0, binaria(YS,ACUM).
-
-%desde(+X,-Y)
-desde(X,X).
-desde(X,Y) :- Z is X+1, desde(Z,Y).
-
-%calcula el minimo						
-minimo(A,B,C,Res) :- A<B, minimoAux(A,C,Res).
-minimo(A,B,C,Res) :- A>B, minimoAux(B,C,Res).
-minimo(A,B,C,Res) :- A=B, minimoAux(A,C,Res).
-
-minimoAux(C,D,Res) :- C<D, Res is C.
-minimoAux(C,D,Res) :- C>D, Res is D.
-minimoAux(C,D,Res) :- C=D, Res is C.
 
