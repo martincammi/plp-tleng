@@ -32,17 +32,26 @@ distEd([X|XS],[Y|YS],D) :- length([X|XS], LengthX), binaria([X|XS],LengthX),
 			   distEd(XS,[Y|YS],Agregar),  NewAgregar      is (Agregar + 1),		%agrego elemento
 			   minimo(NewIntercambiar,NewEliminar,NewAgregar,D).				%calculo el minimo
 
-testEd1(N) :- distEd([1],[],N).
-testEd2(N) :- distEd([],[1],N).
-testEd3(N) :- distEd([1],[1],N).
-testEd4(N) :- distEd([],[],N).
-testEd5(N) :- distEd([1,0,1],[1,1],N).
-testEd6(N) :- distEd([1,0],[1,1,0],N).
-testEd7(X,N) :- distEd([1,0,1],[X,0,1],N).
+testAll :- call(testEd1(N1)), call(testEd2(N2)), call(testEd3(N3)), 
+	   call(testEd4(N4)), call(testEd5(N5)), call(testEd6(N6)),
+	   call(testEd7(N7A, N7B)). %, call(testEd8(N8A, N8B)).
+	   %call(testEd9(N9A, N9B, N9C)), 
+	   %call(testEd10(N10)).
+
+testEd1(N) :- distEd([],[],N), N is 0.
+testEd2(N) :- distEd([1],[],N), N is 1.
+testEd3(N) :- distEd([],[1],N), N is 1.
+testEd4(N) :- distEd([1],[1],N), N is 0.
+testEd5(N) :- distEd([1,0,1],[1,1],N), N is 1.
+testEd6(N) :- distEd([1,0],[1,1,0],N), N is 1.
+
+testEd7(X,N) :- distEd([1,0,1],[X,0,1],N), N is 0, X is 1.
 testEd8(X,N) :- distEd([1,0,1],[X,0,X,1,0],N).
 testEd9(Y,X,N) :- distEd([1,0,0,1,1],[X,0,Y],N).
+
 testEd10(Y) :- distEd([0,0,0],Y,2).
 testEd11(Y,N) :- distEd([0,0,0],Y,N).
+
 testEd12(Y,N) :- distEd([0,0,0],[0|Y],N).
 testEd13(Y,N) :- distEd([0,0,0],[1|Y],N).
 testEd14(Y,X,N) :- distEd([0,0,0],[1,X|Y],N).
