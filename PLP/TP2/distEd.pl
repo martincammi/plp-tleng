@@ -33,7 +33,11 @@ distEd([X|XS],[Y|YS],D) :- length([X|XS], LengthX), binaria([X|XS],LengthX),
 testAll :- call(testEd1(N1)), call(testEd2(N2)), call(testEd3(N3)), call(testEd4(N4)), call(testEd5(N5)), call(testEd6(N6)),
 	   call(testEd7A(N7A)), call(testEd7B(N7B)), call(testEd7C(N7C)), call(testEd7C(N7C)),
 	   call(testEd8(N8A, N8B)),
-	   call(testEd9A(N9A1, N9A2)), call(testEd9B(N9B1, N9B2)).
+	   call(testEd9A(N9A1, N9A2)), call(testEd9B(N9B1, N9B2)),
+   	   call(testEd10A(N10A1, N10A2)), call(testEd10B(N10B1, N10B2)), call(testEd10C(N10C1, N10C2)), call(testEd10D(N10D1, N10D2)),
+	   call(testEd11A(N11A1, N11A2)), call(testEd11B(N11B1, N11B2)), call(testEd11C(N11C1, N11C2)), call(testEd11D(N11D1, N11D2)),
+	   call(testEd11E(N11E1, N11E2)), call(testEd11F(N11F1, N11F2)), call(testEd11G(N11G1, N11G2)), call(testEd11H(N11H1, N11H2)),
+	   call(testEd11I(N11I1, N11I2)), call(testEd11J(N11J1, N11J2)), call(testEd11K(N11K1, N11K2)).
 	   %call(testEd10(N10)).
 
 %Tests de instanciación de N
@@ -56,12 +60,38 @@ testEd9A(X,N) :- distEd([1,0,1],[X,0,X,1,0],N), X is 1, N is 2.
 testEd9B(X,N) :- distEd([1,0,1],[X,0,X,1,0],N), X is 0, N is 3.
 
 %Tests de instanciación de Y y N
-testEd11(Y,N) :- distEd([0,0,0],Y,N).
-testEd12(Y,N) :- distEd([0,0,0],[0|Y],N).
-testEd13(Y,N) :- distEd([0,0,0],[1|Y],N).
+testEd10A(Y,N) :- distEd([0,0,0],Y,N), member(Y, [[0]]), N is 2, !.
+testEd10B(Y,N) :- distEd([0,0,0],Y,N), member(Y, [[1]]), N is 3,!.
+testEd10C(Y,N) :- distEd([0,0,0],Y,N), member(Y, [[0,0]]), N is 1,!.
+testEd10D(Y,N) :- distEd([0,0,0],Y,N), member(Y, [[0,1]]), N is 2,!.
+
+testEd11A(Y,N) :- distEd([0,0,0],[0|Y],N), member(Y, [[]]), N is 2, !.
+testEd11B(Y,N) :- distEd([0,0,0],[0|Y],N), member(Y, [[0]]), N is 1, !.
+testEd11C(Y,N) :- distEd([0,0,0],[0|Y],N), member(Y, [[1]]), N is 2, !.
+testEd11D(Y,N) :- distEd([0,0,0],[0|Y],N), member(Y, [[0,0]]), N is 0, !.
+testEd11E(Y,N) :- distEd([0,0,0],[0|Y],N), member(Y, [[0,1]]), N is 1, !.
+testEd11F(Y,N) :- distEd([0,0,0],[0|Y],N), member(Y, [[1,0]]), N is 1, !.
+testEd11G(Y,N) :- distEd([0,0,0],[0|Y],N), member(Y, [[1,1]]), N is 2, !.
+testEd11H(Y,N) :- distEd([0,0,0],[0|Y],N), member(Y, [[0,0,0]]), N is 1, !.
+testEd11I(Y,N) :- distEd([0,0,0],[0|Y],N), member(Y, [[0,0,1]]), N is 1, !.
+testEd11J(Y,N) :- distEd([0,0,0],[0|Y],N), member(Y, [[0,1,0]]), N is 1, !.
+testEd11K(Y,N) :- distEd([0,0,0],[0|Y],N), member(Y, [[0,1,1]]), N is 2, !.
+
+
+testEd12A(Y,N) :- distEd([0,0,0],[1|Y],N), member(Y, [[]]), N is 3, !.
+testEd12B(Y,N) :- distEd([0,0,0],[1|Y],N), member(Y, [[0]]), N is 2, !.
+testEd12C(Y,N) :- distEd([0,0,0],[1|Y],N), member(Y, [[1]]), N is 3, !.
+testEd12D(Y,N) :- distEd([0,0,0],[1|Y],N), member(Y, [[0,0]]), N is 1, !.
+testEd12E(Y,N) :- distEd([0,0,0],[1|Y],N), member(Y, [[0,1]]), N is 2, !.
+testEd12F(Y,N) :- distEd([0,0,0],[1|Y],N), member(Y, [[1,0]]), N is 2, !.
+testEd12G(Y,N) :- distEd([0,0,0],[1|Y],N), member(Y, [[1,1]]), N is 3, !.
+testEd12H(Y,N) :- distEd([0,0,0],[1|Y],N), member(Y, [[0,0,0]]), N is 1, !.
+testEd12I(Y,N) :- distEd([0,0,0],[1|Y],N), member(Y, [[0,0,1]]), N is 2, !.
+testEd12J(Y,N) :- distEd([0,0,0],[1|Y],N), member(Y, [[0,1,0]]), N is 2, !.
+testEd12K(Y,N) :- distEd([0,0,0],[1|Y],N), member(Y, [[0,1,1]]), N is 3, !.
 
 %Tests de instanciación de X, Y y N
-testEd9(Y,X,N) :- distEd([1,0,0,1,1],[X,0,Y],N), X is 0, Y is 0, N is 3.
+testEd13(Y,X,N) :- distEd([1,0,0,1,1],[X,0,Y],N), X is 0, Y is 0, N is 3.
 testEd14(Y,X,N) :- distEd([0,0,0],[1,X|Y],N).
 
 			   
