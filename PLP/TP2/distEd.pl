@@ -30,7 +30,18 @@ distEd([X|XS],[Y|YS],D) :- length([X|XS], LengthX), binaria([X|XS],LengthX),
 			   minimo(NewIntercambiar,NewEliminar,NewAgregar,D).				%calculo el minimo
 
 %Corre todos los tests.
-testAll :- call(testEd1(N1)), call(testEd2(N2)), call(testEd3(N3)), call(testEd4(N4)), call(testEd5(N5)), call(testEd6(N6)),
+testAll :- var(N1),var(N2),var(N3),var(N4),var(N5),var(N6),var(N7A),var(N7B),var(N8A),var(N8B),var(N9A1),var(N9A2),var(N9B1),var(N9B2),
+	   var(N10A1),var(N10A2),var(N10B1),var(N10B2),var(N10C1),var(N10C2),var(N10D1),var(N10D2),var(N11A1),var(N11A2),var(N11B1),var(N11B2),
+	   var(N11C1),var(N11C2),var(N11D1),var(N11D2),var(N11E1),var(N11E2),var(N11F1),var(N11F2),var(N11G1),var(N11G2),var(N11H1),var(N11H2),
+	   var(N11I1),var(N11I2),var(N11J1),var(N11J2),var(N11K1),var(N11K2),var(N12A1),var(N12A2),var(N12B1),var(N12B2),var(N12C1),var(N12C2),
+	   var(N12D1),var(N12D2),var(N12E1),var(N12E2),var(N12F1),var(N12F2),var(N12G1),var(N12G2),var(N12H1),var(N12H2),var(N12I1),var(N12I2),
+	   var(N12J1),var(N12J2),var(N12K1),var(N12K2),var(N13A1),var(N13A2),var(N13A3),var(N13B1),var(N13B2),var(N13B3),var(N13C1),var(N13C2),
+	   var(N13C3),var(N13D1),var(N13D2),var(N13D3),var(N14A1),var(N14A2),var(N14A3),var(N14B1),var(N14B2),var(N14B3),var(N14C1),var(N14C2),
+	   var(N14C3),var(N14D1),var(N14D2),var(N14D3),var(N14E1),var(N14E2),var(N14E3),var(N14F1),var(N14F2),var(N14F3),var(N14G1),var(N14G2),
+	   var(N14G3),var(N14H1),var(N14H2),var(N14H3),var(N14I1),var(N14I2),var(N14I3),var(N14J1),var(N14J2),var(N14J3),var(N14K1),var(N14K2),
+	   var(N14K3),
+
+	   call(testEd1(N1)), call(testEd2(N2)), call(testEd3(N3)), call(testEd4(N4)), call(testEd5(N5)), call(testEd6(N6)),
 	   call(testEd7A(N7A)), call(testEd7B(N7B)), call(testEd7C(N7C)), call(testEd7C(N7C)),
 	   call(testEd8(N8A, N8B)),
 	   call(testEd9A(N9A1, N9A2)), call(testEd9B(N9B1, N9B2)),
