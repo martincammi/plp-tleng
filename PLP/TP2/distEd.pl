@@ -1,3 +1,6 @@
+
+
+
 %distEd(+S,?T,?D)
 %caso infinitas soluciones: sanitizamos S e instanciamos todas las posibles listas T,
 %calculando para cada caso el D obtenido 
@@ -50,6 +53,8 @@ minimo(A,B,C,Res) :- A=B, minimoAux(A,C,Res).
 minimoAux(C,D,Res) :- C<D, Res is C.
 minimoAux(C,D,Res) :- C>D, Res is D.
 minimoAux(C,D,Res) :- C=D, Res is C.
+
+%---TESTS---
 
 %Todos los tests.
 testAllEd :- var(N1),var(N2),var(N3),var(N4),var(N5),var(N6),var(N7A),var(N7B),var(N8A),var(N8B),var(N9A1),var(N9A2),var(N9B1),var(N9B2),
