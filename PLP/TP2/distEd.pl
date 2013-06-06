@@ -32,12 +32,14 @@ distEd([X|XS],[Y|YS],D) :- length([X|XS], LengthX), binaria([X|XS],LengthX),
 			   distEd(XS,[Y|YS],Agregar),  NewAgregar      is (Agregar + 1),		%agrego elemento
 			   minimo(NewIntercambiar,NewEliminar,NewAgregar,D).				%calculo el minimo
 
-testAll :- call(testEd1(N1)), call(testEd2(N2)), call(testEd3(N3)), 
-	   call(testEd4(N4)), call(testEd5(N5)), call(testEd6(N6)),
-	   call(testEd7(N7A, N7B)). %, call(testEd8(N8A, N8B)).
-	   %call(testEd9(N9A, N9B, N9C)), 
+%Corre todos los tests.
+testAll :- call(testEd1(N1)), call(testEd2(N2)), call(testEd3(N3)), call(testEd4(N4)), call(testEd5(N5)), call(testEd6(N6)),
+	   call(testEd7A(N7A)), call(testEd7B(N7B)), call(testEd7C(N7C)), call(testEd7C(N7C)),
+	   call(testEd8(N8A, N8B)),
+	   call(testEd9A(N9A1, N9A2)), call(testEd9B(N9B1, N9B2)).
 	   %call(testEd10(N10)).
 
+%Tests se instanciación de N
 testEd1(N) :- distEd([],[],N), N is 0.
 testEd2(N) :- distEd([1],[],N), N is 1.
 testEd3(N) :- distEd([],[1],N), N is 1.
@@ -45,16 +47,26 @@ testEd4(N) :- distEd([1],[1],N), N is 0.
 testEd5(N) :- distEd([1,0,1],[1,1],N), N is 1.
 testEd6(N) :- distEd([1,0],[1,1,0],N), N is 1.
 
-testEd7(X,N) :- distEd([1,0,1],[X,0,1],N), N is 0, X is 1.
-testEd8(X,N) :- distEd([1,0,1],[X,0,X,1,0],N).
-testEd9(Y,X,N) :- distEd([1,0,0,1,1],[X,0,Y],N).
+%Tests se instanciación de Y
+testEd7A(Y) :- distEd([0,0,0],Y,2), member(Y, [[1,1,0]]).
+testEd7B(Y) :- distEd([0,0,0],Y,2), member(Y, [[1,0,1]]).
+testEd7C(Y) :- distEd([0,0,0],Y,2), member(Y, [[0,1,1]]).
+testEd7D(Y) :- distEd([0,0,0],Y,2), member(Y, [[0]]).
 
-testEd10(Y) :- distEd([0,0,0],Y,2).
+%Tests se instanciación de X y N
+testEd8(X,N) :- distEd([1,0,1],[X,0,1],N), N is 0, X is 1.
+testEd9A(X,N) :- distEd([1,0,1],[X,0,X,1,0],N), X is 1, N is 2.
+testEd9B(X,N) :- distEd([1,0,1],[X,0,X,1,0],N), X is 0, N is 3.
+
+%Tests se instanciación de Y y N
 testEd11(Y,N) :- distEd([0,0,0],Y,N).
-
 testEd12(Y,N) :- distEd([0,0,0],[0|Y],N).
 testEd13(Y,N) :- distEd([0,0,0],[1|Y],N).
+
+%Tests se instanciación de X, Y y N
+testEd9(Y,X,N) :- distEd([1,0,0,1,1],[X,0,Y],N), X is 0, Y is 0, N is 3.
 testEd14(Y,X,N) :- distEd([0,0,0],[1,X|Y],N).
+
 			   
 %entre(+X, +Y, -Z)
 entre(X,Y,X) :- X=<Y.
