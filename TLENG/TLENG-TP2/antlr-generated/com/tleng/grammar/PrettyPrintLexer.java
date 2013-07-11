@@ -1,4 +1,4 @@
-// $ANTLR 3.5 C:\\Users\\Anita\\workspace\\TLENG-TP2\\src\\com\\tleng\\grammar\\PrettyPrint.g 2013-07-09 21:33:58
+// $ANTLR 3.5 C:\\Users\\Anita\\workspace\\TLENG-TP2\\src\\com\\tleng\\grammar\\PrettyPrint.g 2013-07-10 22:13:25
 
   package com.tleng.grammar;
 
@@ -28,10 +28,9 @@ public class PrettyPrintLexer extends Lexer {
 	public static final int InitP=18;
 	public static final int InitScript=19;
 	public static final int InitTitle=20;
-	public static final int NoScripts=21;
-	public static final int NoTags=22;
-	public static final int Something=23;
-	public static final int WS=24;
+	public static final int NoTags=21;
+	public static final int Something=22;
+	public static final int WS=23;
 
 	// delegates
 	// delegators
@@ -187,10 +186,11 @@ public class PrettyPrintLexer extends Lexer {
 		try {
 			int _type = Something;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// C:\\Users\\Anita\\workspace\\TLENG-TP2\\src\\com\\tleng\\grammar\\PrettyPrint.g:90:11: ( 'a' )
-			// C:\\Users\\Anita\\workspace\\TLENG-TP2\\src\\com\\tleng\\grammar\\PrettyPrint.g:90:13: 'a'
+			// C:\\Users\\Anita\\workspace\\TLENG-TP2\\src\\com\\tleng\\grammar\\PrettyPrint.g:93:11: ( '=a' )
+			// C:\\Users\\Anita\\workspace\\TLENG-TP2\\src\\com\\tleng\\grammar\\PrettyPrint.g:93:13: '=a'
 			{
-			match('a'); 
+			match("=a"); 
+
 			}
 
 			state.type = _type;
@@ -207,8 +207,8 @@ public class PrettyPrintLexer extends Lexer {
 		try {
 			int _type = InitHTML;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// C:\\Users\\Anita\\workspace\\TLENG-TP2\\src\\com\\tleng\\grammar\\PrettyPrint.g:92:10: ( '<html>' )
-			// C:\\Users\\Anita\\workspace\\TLENG-TP2\\src\\com\\tleng\\grammar\\PrettyPrint.g:92:12: '<html>'
+			// C:\\Users\\Anita\\workspace\\TLENG-TP2\\src\\com\\tleng\\grammar\\PrettyPrint.g:95:10: ( '<html>' )
+			// C:\\Users\\Anita\\workspace\\TLENG-TP2\\src\\com\\tleng\\grammar\\PrettyPrint.g:95:12: '<html>'
 			{
 			match("<html>"); 
 
@@ -228,8 +228,8 @@ public class PrettyPrintLexer extends Lexer {
 		try {
 			int _type = EndHTML;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// C:\\Users\\Anita\\workspace\\TLENG-TP2\\src\\com\\tleng\\grammar\\PrettyPrint.g:93:8: ( '</html>' )
-			// C:\\Users\\Anita\\workspace\\TLENG-TP2\\src\\com\\tleng\\grammar\\PrettyPrint.g:93:10: '</html>'
+			// C:\\Users\\Anita\\workspace\\TLENG-TP2\\src\\com\\tleng\\grammar\\PrettyPrint.g:96:8: ( '</html>' )
+			// C:\\Users\\Anita\\workspace\\TLENG-TP2\\src\\com\\tleng\\grammar\\PrettyPrint.g:96:10: '</html>'
 			{
 			match("</html>"); 
 
@@ -249,8 +249,8 @@ public class PrettyPrintLexer extends Lexer {
 		try {
 			int _type = InitHead;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// C:\\Users\\Anita\\workspace\\TLENG-TP2\\src\\com\\tleng\\grammar\\PrettyPrint.g:94:10: ( '<head>' )
-			// C:\\Users\\Anita\\workspace\\TLENG-TP2\\src\\com\\tleng\\grammar\\PrettyPrint.g:94:12: '<head>'
+			// C:\\Users\\Anita\\workspace\\TLENG-TP2\\src\\com\\tleng\\grammar\\PrettyPrint.g:97:10: ( '<head>' )
+			// C:\\Users\\Anita\\workspace\\TLENG-TP2\\src\\com\\tleng\\grammar\\PrettyPrint.g:97:12: '<head>'
 			{
 			match("<head>"); 
 
@@ -270,8 +270,8 @@ public class PrettyPrintLexer extends Lexer {
 		try {
 			int _type = EndHead;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// C:\\Users\\Anita\\workspace\\TLENG-TP2\\src\\com\\tleng\\grammar\\PrettyPrint.g:95:9: ( '</head>' )
-			// C:\\Users\\Anita\\workspace\\TLENG-TP2\\src\\com\\tleng\\grammar\\PrettyPrint.g:95:11: '</head>'
+			// C:\\Users\\Anita\\workspace\\TLENG-TP2\\src\\com\\tleng\\grammar\\PrettyPrint.g:98:9: ( '</head>' )
+			// C:\\Users\\Anita\\workspace\\TLENG-TP2\\src\\com\\tleng\\grammar\\PrettyPrint.g:98:11: '</head>'
 			{
 			match("</head>"); 
 
@@ -291,8 +291,8 @@ public class PrettyPrintLexer extends Lexer {
 		try {
 			int _type = InitBody;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// C:\\Users\\Anita\\workspace\\TLENG-TP2\\src\\com\\tleng\\grammar\\PrettyPrint.g:96:10: ( '<body>' )
-			// C:\\Users\\Anita\\workspace\\TLENG-TP2\\src\\com\\tleng\\grammar\\PrettyPrint.g:96:12: '<body>'
+			// C:\\Users\\Anita\\workspace\\TLENG-TP2\\src\\com\\tleng\\grammar\\PrettyPrint.g:99:10: ( '<body>' )
+			// C:\\Users\\Anita\\workspace\\TLENG-TP2\\src\\com\\tleng\\grammar\\PrettyPrint.g:99:12: '<body>'
 			{
 			match("<body>"); 
 
@@ -312,8 +312,8 @@ public class PrettyPrintLexer extends Lexer {
 		try {
 			int _type = EndBody;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// C:\\Users\\Anita\\workspace\\TLENG-TP2\\src\\com\\tleng\\grammar\\PrettyPrint.g:97:9: ( '</body>' )
-			// C:\\Users\\Anita\\workspace\\TLENG-TP2\\src\\com\\tleng\\grammar\\PrettyPrint.g:97:11: '</body>'
+			// C:\\Users\\Anita\\workspace\\TLENG-TP2\\src\\com\\tleng\\grammar\\PrettyPrint.g:100:9: ( '</body>' )
+			// C:\\Users\\Anita\\workspace\\TLENG-TP2\\src\\com\\tleng\\grammar\\PrettyPrint.g:100:11: '</body>'
 			{
 			match("</body>"); 
 
@@ -333,8 +333,8 @@ public class PrettyPrintLexer extends Lexer {
 		try {
 			int _type = InitTitle;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// C:\\Users\\Anita\\workspace\\TLENG-TP2\\src\\com\\tleng\\grammar\\PrettyPrint.g:98:11: ( '<title>' )
-			// C:\\Users\\Anita\\workspace\\TLENG-TP2\\src\\com\\tleng\\grammar\\PrettyPrint.g:98:13: '<title>'
+			// C:\\Users\\Anita\\workspace\\TLENG-TP2\\src\\com\\tleng\\grammar\\PrettyPrint.g:101:11: ( '<title>' )
+			// C:\\Users\\Anita\\workspace\\TLENG-TP2\\src\\com\\tleng\\grammar\\PrettyPrint.g:101:13: '<title>'
 			{
 			match("<title>"); 
 
@@ -354,8 +354,8 @@ public class PrettyPrintLexer extends Lexer {
 		try {
 			int _type = EndTitle;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// C:\\Users\\Anita\\workspace\\TLENG-TP2\\src\\com\\tleng\\grammar\\PrettyPrint.g:99:10: ( '</title>' )
-			// C:\\Users\\Anita\\workspace\\TLENG-TP2\\src\\com\\tleng\\grammar\\PrettyPrint.g:99:12: '</title>'
+			// C:\\Users\\Anita\\workspace\\TLENG-TP2\\src\\com\\tleng\\grammar\\PrettyPrint.g:102:10: ( '</title>' )
+			// C:\\Users\\Anita\\workspace\\TLENG-TP2\\src\\com\\tleng\\grammar\\PrettyPrint.g:102:12: '</title>'
 			{
 			match("</title>"); 
 
@@ -375,8 +375,8 @@ public class PrettyPrintLexer extends Lexer {
 		try {
 			int _type = InitScript;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// C:\\Users\\Anita\\workspace\\TLENG-TP2\\src\\com\\tleng\\grammar\\PrettyPrint.g:100:12: ( '<script>' )
-			// C:\\Users\\Anita\\workspace\\TLENG-TP2\\src\\com\\tleng\\grammar\\PrettyPrint.g:100:14: '<script>'
+			// C:\\Users\\Anita\\workspace\\TLENG-TP2\\src\\com\\tleng\\grammar\\PrettyPrint.g:103:12: ( '<script>' )
+			// C:\\Users\\Anita\\workspace\\TLENG-TP2\\src\\com\\tleng\\grammar\\PrettyPrint.g:103:14: '<script>'
 			{
 			match("<script>"); 
 
@@ -396,8 +396,8 @@ public class PrettyPrintLexer extends Lexer {
 		try {
 			int _type = EndScript;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// C:\\Users\\Anita\\workspace\\TLENG-TP2\\src\\com\\tleng\\grammar\\PrettyPrint.g:101:11: ( '</script>' )
-			// C:\\Users\\Anita\\workspace\\TLENG-TP2\\src\\com\\tleng\\grammar\\PrettyPrint.g:101:13: '</script>'
+			// C:\\Users\\Anita\\workspace\\TLENG-TP2\\src\\com\\tleng\\grammar\\PrettyPrint.g:104:11: ( '</script>' )
+			// C:\\Users\\Anita\\workspace\\TLENG-TP2\\src\\com\\tleng\\grammar\\PrettyPrint.g:104:13: '</script>'
 			{
 			match("</script>"); 
 
@@ -417,8 +417,8 @@ public class PrettyPrintLexer extends Lexer {
 		try {
 			int _type = InitDiv;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// C:\\Users\\Anita\\workspace\\TLENG-TP2\\src\\com\\tleng\\grammar\\PrettyPrint.g:102:9: ( '<div>' )
-			// C:\\Users\\Anita\\workspace\\TLENG-TP2\\src\\com\\tleng\\grammar\\PrettyPrint.g:102:11: '<div>'
+			// C:\\Users\\Anita\\workspace\\TLENG-TP2\\src\\com\\tleng\\grammar\\PrettyPrint.g:105:9: ( '<div>' )
+			// C:\\Users\\Anita\\workspace\\TLENG-TP2\\src\\com\\tleng\\grammar\\PrettyPrint.g:105:11: '<div>'
 			{
 			match("<div>"); 
 
@@ -438,8 +438,8 @@ public class PrettyPrintLexer extends Lexer {
 		try {
 			int _type = EndDiv;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// C:\\Users\\Anita\\workspace\\TLENG-TP2\\src\\com\\tleng\\grammar\\PrettyPrint.g:103:8: ( '</div>' )
-			// C:\\Users\\Anita\\workspace\\TLENG-TP2\\src\\com\\tleng\\grammar\\PrettyPrint.g:103:10: '</div>'
+			// C:\\Users\\Anita\\workspace\\TLENG-TP2\\src\\com\\tleng\\grammar\\PrettyPrint.g:106:8: ( '</div>' )
+			// C:\\Users\\Anita\\workspace\\TLENG-TP2\\src\\com\\tleng\\grammar\\PrettyPrint.g:106:10: '</div>'
 			{
 			match("</div>"); 
 
@@ -459,8 +459,8 @@ public class PrettyPrintLexer extends Lexer {
 		try {
 			int _type = InitH1;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// C:\\Users\\Anita\\workspace\\TLENG-TP2\\src\\com\\tleng\\grammar\\PrettyPrint.g:104:8: ( '<h1>' )
-			// C:\\Users\\Anita\\workspace\\TLENG-TP2\\src\\com\\tleng\\grammar\\PrettyPrint.g:104:10: '<h1>'
+			// C:\\Users\\Anita\\workspace\\TLENG-TP2\\src\\com\\tleng\\grammar\\PrettyPrint.g:107:8: ( '<h1>' )
+			// C:\\Users\\Anita\\workspace\\TLENG-TP2\\src\\com\\tleng\\grammar\\PrettyPrint.g:107:10: '<h1>'
 			{
 			match("<h1>"); 
 
@@ -480,8 +480,8 @@ public class PrettyPrintLexer extends Lexer {
 		try {
 			int _type = EndH1;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// C:\\Users\\Anita\\workspace\\TLENG-TP2\\src\\com\\tleng\\grammar\\PrettyPrint.g:105:7: ( '</h1>' )
-			// C:\\Users\\Anita\\workspace\\TLENG-TP2\\src\\com\\tleng\\grammar\\PrettyPrint.g:105:9: '</h1>'
+			// C:\\Users\\Anita\\workspace\\TLENG-TP2\\src\\com\\tleng\\grammar\\PrettyPrint.g:108:7: ( '</h1>' )
+			// C:\\Users\\Anita\\workspace\\TLENG-TP2\\src\\com\\tleng\\grammar\\PrettyPrint.g:108:9: '</h1>'
 			{
 			match("</h1>"); 
 
@@ -501,8 +501,8 @@ public class PrettyPrintLexer extends Lexer {
 		try {
 			int _type = InitP;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// C:\\Users\\Anita\\workspace\\TLENG-TP2\\src\\com\\tleng\\grammar\\PrettyPrint.g:106:7: ( '<p>' )
-			// C:\\Users\\Anita\\workspace\\TLENG-TP2\\src\\com\\tleng\\grammar\\PrettyPrint.g:106:9: '<p>'
+			// C:\\Users\\Anita\\workspace\\TLENG-TP2\\src\\com\\tleng\\grammar\\PrettyPrint.g:109:7: ( '<p>' )
+			// C:\\Users\\Anita\\workspace\\TLENG-TP2\\src\\com\\tleng\\grammar\\PrettyPrint.g:109:9: '<p>'
 			{
 			match("<p>"); 
 
@@ -522,8 +522,8 @@ public class PrettyPrintLexer extends Lexer {
 		try {
 			int _type = EndP;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// C:\\Users\\Anita\\workspace\\TLENG-TP2\\src\\com\\tleng\\grammar\\PrettyPrint.g:107:6: ( '</p>' )
-			// C:\\Users\\Anita\\workspace\\TLENG-TP2\\src\\com\\tleng\\grammar\\PrettyPrint.g:107:8: '</p>'
+			// C:\\Users\\Anita\\workspace\\TLENG-TP2\\src\\com\\tleng\\grammar\\PrettyPrint.g:110:6: ( '</p>' )
+			// C:\\Users\\Anita\\workspace\\TLENG-TP2\\src\\com\\tleng\\grammar\\PrettyPrint.g:110:8: '</p>'
 			{
 			match("</p>"); 
 
@@ -543,8 +543,8 @@ public class PrettyPrintLexer extends Lexer {
 		try {
 			int _type = Br;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// C:\\Users\\Anita\\workspace\\TLENG-TP2\\src\\com\\tleng\\grammar\\PrettyPrint.g:108:4: ( '<br>' )
-			// C:\\Users\\Anita\\workspace\\TLENG-TP2\\src\\com\\tleng\\grammar\\PrettyPrint.g:108:6: '<br>'
+			// C:\\Users\\Anita\\workspace\\TLENG-TP2\\src\\com\\tleng\\grammar\\PrettyPrint.g:111:4: ( '<br>' )
+			// C:\\Users\\Anita\\workspace\\TLENG-TP2\\src\\com\\tleng\\grammar\\PrettyPrint.g:111:6: '<br>'
 			{
 			match("<br>"); 
 
@@ -564,10 +564,38 @@ public class PrettyPrintLexer extends Lexer {
 		try {
 			int _type = NoTags;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// C:\\Users\\Anita\\workspace\\TLENG-TP2\\src\\com\\tleng\\grammar\\PrettyPrint.g:109:8: ( 'c' )
-			// C:\\Users\\Anita\\workspace\\TLENG-TP2\\src\\com\\tleng\\grammar\\PrettyPrint.g:109:10: 'c'
+			// C:\\Users\\Anita\\workspace\\TLENG-TP2\\src\\com\\tleng\\grammar\\PrettyPrint.g:116:8: ( ( 'a' .. 'z' | 'A' .. 'Z' | '0' .. '9' | '*' | '@' | ',' | '.' | ';' | '\"' | '&' | '$' | '(' | ')' | '[' | ']' | '{' | '}' )* )
+			// C:\\Users\\Anita\\workspace\\TLENG-TP2\\src\\com\\tleng\\grammar\\PrettyPrint.g:116:9: ( 'a' .. 'z' | 'A' .. 'Z' | '0' .. '9' | '*' | '@' | ',' | '.' | ';' | '\"' | '&' | '$' | '(' | ')' | '[' | ']' | '{' | '}' )*
 			{
-			match('c'); 
+			// C:\\Users\\Anita\\workspace\\TLENG-TP2\\src\\com\\tleng\\grammar\\PrettyPrint.g:116:9: ( 'a' .. 'z' | 'A' .. 'Z' | '0' .. '9' | '*' | '@' | ',' | '.' | ';' | '\"' | '&' | '$' | '(' | ')' | '[' | ']' | '{' | '}' )*
+			loop3:
+			while (true) {
+				int alt3=2;
+				int LA3_0 = input.LA(1);
+				if ( (LA3_0=='\"'||LA3_0=='$'||LA3_0=='&'||(LA3_0 >= '(' && LA3_0 <= '*')||LA3_0==','||LA3_0=='.'||(LA3_0 >= '0' && LA3_0 <= '9')||LA3_0==';'||(LA3_0 >= '@' && LA3_0 <= '[')||LA3_0==']'||(LA3_0 >= 'a' && LA3_0 <= '{')||LA3_0=='}') ) {
+					alt3=1;
+				}
+
+				switch (alt3) {
+				case 1 :
+					// C:\\Users\\Anita\\workspace\\TLENG-TP2\\src\\com\\tleng\\grammar\\PrettyPrint.g:
+					{
+					if ( input.LA(1)=='\"'||input.LA(1)=='$'||input.LA(1)=='&'||(input.LA(1) >= '(' && input.LA(1) <= '*')||input.LA(1)==','||input.LA(1)=='.'||(input.LA(1) >= '0' && input.LA(1) <= '9')||input.LA(1)==';'||(input.LA(1) >= '@' && input.LA(1) <= '[')||input.LA(1)==']'||(input.LA(1) >= 'a' && input.LA(1) <= '{')||input.LA(1)=='}' ) {
+						input.consume();
+					}
+					else {
+						MismatchedSetException mse = new MismatchedSetException(null,input);
+						recover(mse);
+						throw mse;
+					}
+					}
+					break;
+
+				default :
+					break loop3;
+				}
+			}
+
 			}
 
 			state.type = _type;
@@ -579,37 +607,17 @@ public class PrettyPrintLexer extends Lexer {
 	}
 	// $ANTLR end "NoTags"
 
-	// $ANTLR start "NoScripts"
-	public final void mNoScripts() throws RecognitionException {
-		try {
-			int _type = NoScripts;
-			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// C:\\Users\\Anita\\workspace\\TLENG-TP2\\src\\com\\tleng\\grammar\\PrettyPrint.g:110:11: ( 'b' )
-			// C:\\Users\\Anita\\workspace\\TLENG-TP2\\src\\com\\tleng\\grammar\\PrettyPrint.g:110:13: 'b'
-			{
-			match('b'); 
-			}
-
-			state.type = _type;
-			state.channel = _channel;
-		}
-		finally {
-			// do for sure before leaving
-		}
-	}
-	// $ANTLR end "NoScripts"
-
 	@Override
 	public void mTokens() throws RecognitionException {
-		// C:\\Users\\Anita\\workspace\\TLENG-TP2\\src\\com\\tleng\\grammar\\PrettyPrint.g:1:8: ( WS | Something | InitHTML | EndHTML | InitHead | EndHead | InitBody | EndBody | InitTitle | EndTitle | InitScript | EndScript | InitDiv | EndDiv | InitH1 | EndH1 | InitP | EndP | Br | NoTags | NoScripts )
-		int alt3=21;
+		// C:\\Users\\Anita\\workspace\\TLENG-TP2\\src\\com\\tleng\\grammar\\PrettyPrint.g:1:8: ( WS | Something | InitHTML | EndHTML | InitHead | EndHead | InitBody | EndBody | InitTitle | EndTitle | InitScript | EndScript | InitDiv | EndDiv | InitH1 | EndH1 | InitP | EndP | Br | NoTags )
+		int alt4=20;
 		switch ( input.LA(1) ) {
 		case '\t':
 		case '\n':
 		case '\r':
 		case ' ':
 			{
-			alt3=1;
+			alt4=1;
 			}
 			break;
 		case '<':
@@ -617,7 +625,7 @@ public class PrettyPrintLexer extends Lexer {
 			switch ( input.LA(2) ) {
 			case '!':
 				{
-				alt3=1;
+				alt4=1;
 				}
 				break;
 			case 'h':
@@ -625,17 +633,17 @@ public class PrettyPrintLexer extends Lexer {
 				switch ( input.LA(3) ) {
 				case 't':
 					{
-					alt3=3;
+					alt4=3;
 					}
 					break;
 				case 'e':
 					{
-					alt3=5;
+					alt4=5;
 					}
 					break;
 				case '1':
 					{
-					alt3=15;
+					alt4=15;
 					}
 					break;
 				default:
@@ -645,7 +653,7 @@ public class PrettyPrintLexer extends Lexer {
 							input.consume();
 						}
 						NoViableAltException nvae =
-							new NoViableAltException("", 3, 6, input);
+							new NoViableAltException("", 4, 5, input);
 						throw nvae;
 					} finally {
 						input.rewind(nvaeMark);
@@ -661,17 +669,17 @@ public class PrettyPrintLexer extends Lexer {
 					switch ( input.LA(4) ) {
 					case 't':
 						{
-						alt3=4;
+						alt4=4;
 						}
 						break;
 					case 'e':
 						{
-						alt3=6;
+						alt4=6;
 						}
 						break;
 					case '1':
 						{
-						alt3=16;
+						alt4=16;
 						}
 						break;
 					default:
@@ -681,7 +689,7 @@ public class PrettyPrintLexer extends Lexer {
 								input.consume();
 							}
 							NoViableAltException nvae =
-								new NoViableAltException("", 3, 16, input);
+								new NoViableAltException("", 4, 15, input);
 							throw nvae;
 						} finally {
 							input.rewind(nvaeMark);
@@ -691,27 +699,27 @@ public class PrettyPrintLexer extends Lexer {
 					break;
 				case 'b':
 					{
-					alt3=8;
+					alt4=8;
 					}
 					break;
 				case 't':
 					{
-					alt3=10;
+					alt4=10;
 					}
 					break;
 				case 's':
 					{
-					alt3=12;
+					alt4=12;
 					}
 					break;
 				case 'd':
 					{
-					alt3=14;
+					alt4=14;
 					}
 					break;
 				case 'p':
 					{
-					alt3=18;
+					alt4=18;
 					}
 					break;
 				default:
@@ -721,7 +729,7 @@ public class PrettyPrintLexer extends Lexer {
 							input.consume();
 						}
 						NoViableAltException nvae =
-							new NoViableAltException("", 3, 7, input);
+							new NoViableAltException("", 4, 6, input);
 						throw nvae;
 					} finally {
 						input.rewind(nvaeMark);
@@ -731,12 +739,12 @@ public class PrettyPrintLexer extends Lexer {
 				break;
 			case 'b':
 				{
-				int LA3_8 = input.LA(3);
-				if ( (LA3_8=='o') ) {
-					alt3=7;
+				int LA4_7 = input.LA(3);
+				if ( (LA4_7=='o') ) {
+					alt4=7;
 				}
-				else if ( (LA3_8=='r') ) {
-					alt3=19;
+				else if ( (LA4_7=='r') ) {
+					alt4=19;
 				}
 
 				else {
@@ -746,7 +754,7 @@ public class PrettyPrintLexer extends Lexer {
 							input.consume();
 						}
 						NoViableAltException nvae =
-							new NoViableAltException("", 3, 8, input);
+							new NoViableAltException("", 4, 7, input);
 						throw nvae;
 					} finally {
 						input.rewind(nvaeMark);
@@ -757,22 +765,22 @@ public class PrettyPrintLexer extends Lexer {
 				break;
 			case 't':
 				{
-				alt3=9;
+				alt4=9;
 				}
 				break;
 			case 's':
 				{
-				alt3=11;
+				alt4=11;
 				}
 				break;
 			case 'd':
 				{
-				alt3=13;
+				alt4=13;
 				}
 				break;
 			case 'p':
 				{
-				alt3=17;
+				alt4=17;
 				}
 				break;
 			default:
@@ -780,7 +788,7 @@ public class PrettyPrintLexer extends Lexer {
 				try {
 					input.consume();
 					NoViableAltException nvae =
-						new NoViableAltException("", 3, 2, input);
+						new NoViableAltException("", 4, 2, input);
 					throw nvae;
 				} finally {
 					input.rewind(nvaeMark);
@@ -788,27 +796,15 @@ public class PrettyPrintLexer extends Lexer {
 			}
 			}
 			break;
-		case 'a':
+		case '=':
 			{
-			alt3=2;
-			}
-			break;
-		case 'c':
-			{
-			alt3=20;
-			}
-			break;
-		case 'b':
-			{
-			alt3=21;
+			alt4=2;
 			}
 			break;
 		default:
-			NoViableAltException nvae =
-				new NoViableAltException("", 3, 0, input);
-			throw nvae;
+			alt4=20;
 		}
-		switch (alt3) {
+		switch (alt4) {
 			case 1 :
 				// C:\\Users\\Anita\\workspace\\TLENG-TP2\\src\\com\\tleng\\grammar\\PrettyPrint.g:1:10: WS
 				{
@@ -946,13 +942,6 @@ public class PrettyPrintLexer extends Lexer {
 				// C:\\Users\\Anita\\workspace\\TLENG-TP2\\src\\com\\tleng\\grammar\\PrettyPrint.g:1:156: NoTags
 				{
 				mNoTags(); 
-
-				}
-				break;
-			case 21 :
-				// C:\\Users\\Anita\\workspace\\TLENG-TP2\\src\\com\\tleng\\grammar\\PrettyPrint.g:1:163: NoScripts
-				{
-				mNoScripts(); 
 
 				}
 				break;

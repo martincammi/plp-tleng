@@ -22,72 +22,75 @@ WS
     	{$channel=HIDDEN;}
     ;
 
-begin : InitHTML {TP2.Print("<html> &lt;html&gt;" +
+begin : InitHTML {PrettyPrinter.GetInstance().Append("<html> &lt;html&gt;" +
 							  " <head>" +
 							   " <style type='text/css'>" +
 							   " div.bloque {margin-left:2em;}" +
-							   " span.tagHeadBody {color: pink;}" +
+							   " span.tagHeadBody {color: blue;}" +
 							   " span.tagTitleScript {color: orange;}" + 
-							   " span.Script {color: yellow;}" +
-							   " span.tagTexto {color:fuchsia;}" + 
+							   " span.Script {color: orange;}" +
+							   " span.tagTexto {color:grey;}" + 
 							   " span.tagH1 {color: red;}" +
-							   " span.tagBr {color: blue;}" +
-							   " span.tagDiv{color: green;}" +
-							   " span.tagP{color: orange;}" +
+							   " span.tagBr {color: lightblue;}" +
+							   " span.tagDiv{color: crimson;}" +
+							   " span.tagP{color: purple;}" +
 							   " </style>" +
 							   " </head>");}
         html	
-		EndHTML {TP2.PrintTag("/html"); TP2.Print("</html>");}
+		EndHTML {PrettyPrinter.GetInstance().Tag("/html"); 
+				 PrettyPrinter.GetInstance().Append("</html>");}
 		;
 
 html : head body;
 
-head : 	InitHead {TP2.PrintStartBlock("tagHeadBody", "head");} 
+head : 	InitHead {PrettyPrinter.GetInstance().StartBlock("tagHeadBody", "head");} 
 		leer_head 
-		EndHead  {TP2.PrintCloseBlock("tagHeadBody", "/head" );}
+		EndHead  {PrettyPrinter.GetInstance().CloseBlock("tagHeadBody", "/head" );}
 	| ;
 
-body : 	InitBody {TP2.PrintStartBlock("tagHeadBody", "body");
-				  TP2.PrintStartBlock();}
+body : 	InitBody {PrettyPrinter.GetInstance().StartBlock("tagHeadBody", "body");
+				  PrettyPrinter.GetInstance().StartBlock();}
 		leer_body 
-		EndBody  {TP2.PrintCloseBlock();
-				  TP2.PrintCloseBlock("tagHeadBody", "/body");}
+		EndBody  {PrettyPrinter.GetInstance().CloseBlock();
+				  PrettyPrinter.GetInstance().CloseBlock("tagHeadBody", "/body");}
 	  | ; 
 
 leer_head :   script leer_head 
 			| title leer_head 
 			| ; 
 
-title : InitTitle {TP2.PrintStartBlock("tagTitleScript", "title");}
-		Something 
-		EndTitle  {TP2.PrintCloseBlock("tagTitleScript", "/title");}
+title : InitTitle 		{PrettyPrinter.GetInstance().StartBlock("tagTitleScript", "title");}
+		content=NoTags 	{PrettyPrinter.GetInstance().Text("tagTexto", $content.text);}
+		EndTitle  		{PrettyPrinter.GetInstance().CloseBlock("tagTitleScript", "/title");}
 		;
 
-script : InitScript {TP2.PrintStartBlock("tagTitleScript", "script");
-				     TP2.PrintStartBlock();}
-		 Something 
-		 EndScript  {TP2.PrintCloseBlock();
-				     TP2.PrintCloseBlock("tagTitleScript", "/script");}
+script : InitScript {PrettyPrinter.GetInstance().StartBlock("tagTitleScript", "script");
+				     PrettyPrinter.GetInstance().StartBlock();}
+		 content=NoTags 	
+		 			{PrettyPrinter.GetInstance().Text("tagTexto", $content.text);}
+		 EndScript  {PrettyPrinter.GetInstance().CloseBlock();
+				     PrettyPrinter.GetInstance().CloseBlock("tagTitleScript", "/script");}
 		 ;
 
-leer_body :   Something leer_body 
-			| Br 	  	{TP2.PrintNewLineSpan("tagBr", "br");}
+leer_body :   content=NoTags {PrettyPrinter.GetInstance().Text("tagTexto", $content.text);}
 			  leer_body 
-			| InitDiv 	{TP2.PrintNewLineSpan("tagDiv", "div");}
+			| Br 	  	{PrettyPrinter.GetInstance().LineSpan("tagBr", "br");}
 			  leer_body 
-			  EndDiv 	{TP2.PrintNewLineSpan("tagDiv", "/div");}
+			| InitDiv 	{PrettyPrinter.GetInstance().LineSpan("tagDiv", "div");}
 			  leer_body 
-			| InitP		{TP2.PrintNewLineSpan("tagP", "p");} 
+			  EndDiv 	{PrettyPrinter.GetInstance().LineSpan("tagDiv", "/div");}
 			  leer_body 
-			  EndP 		{TP2.PrintNewLineSpan("tagP", "/p");}
+			| InitP		{PrettyPrinter.GetInstance().LineSpan("tagP", "p");} 
+			  leer_body 
+			  EndP 		{PrettyPrinter.GetInstance().LineSpan("tagP", "/p");}
 			  leer_body
-			| InitH1 	{TP2.PrintNewLineSpan("tagH1", "h1");}
+			| InitH1 	{PrettyPrinter.GetInstance().LineSpan("tagH1", "h1");}
 			  leer_body 
-			  EndH1 	{TP2.PrintNewLineSpan("tagH1", "/h1");}
+			  EndH1 	{PrettyPrinter.GetInstance().LineSpan("tagH1", "/h1");}
 			  leer_body
 			| ; 
 
-Something : 'a'; //TODO: Completar
+Something : '=a'; //TODO: Completar
 
 InitHTML : '<html>';
 EndHTML: '</html>';
@@ -106,8 +109,12 @@ EndH1 : '</h1>';
 InitP : '<p>';
 EndP : '</p>';
 Br : '<br>';
-NoTags : 'c'; //~(Br|InitP); //TODO: Completar
-NoScripts : 'b'; //TODO: Completar
+//Letters : 'a'..'z'|'A'..'Z';
+//Numbers : '0'..'9';
+//Symbols : '*'|'@'|','|'.'|';'|'&'|'$';
+//Delimiters : '('|')'|'['|']'|'{'|'}';
+NoTags :('a'..'z'|'A'..'Z'|'0'..'9'|'*'|'@'|','|'.'|';'|'"'|'&'|'$'|'('|')'|'['|']'|'{'|'}')*;//(Letters | Numbers | Symbols | Delimiters)+;
+//NoScripts : '<b'; //TODO: NO LO ESTAMOS USANDO!!
 
 
 
