@@ -1,0 +1,1 @@
+<html><head><script>$(".container").append("Header");</script><script>Tenemos varios scripts</script><title>Esto es un titulo</title><script>print("Title en medio (Y)")</script></head></html>

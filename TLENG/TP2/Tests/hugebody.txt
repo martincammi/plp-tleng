@@ -1,0 +1,1 @@
+<html><head><title>Something's Gone Terribly Wrong</title><script></script><script>bN_cfg={p:{"dL_ch":"us.hpmguncat","dL_dpt":"error","cobrand":"HuffPost"}};</script></head><body><div></div><div><h1>Oh, Noes! A 404!</h1><div><div></div><p>or</p></div></div></body></html>

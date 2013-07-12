@@ -1,0 +1,22 @@
+\textit{G} $=$ $\langle${$V_N$, $V_T$, \textit{P}, BEGIN}$\rangle$ donde 
+
+\indent $V_N$ $=$ \{ BEGIN, HTML, HEAD, LEER\_HEAD, TITLE, SCRIPT, BODY, LEER\_BODY \} 
+
+\indent $V_T$ $=$ \{ initHtml, endHtml, initHead, endHead, initTitle, endTitle, initScript, endScript, initBody, endBody, initDiv, endDiv, initH1, endH1, initP, endP, br, noTags \}
+
+\indent y \textit{P} est\'a dada por: 
+
+  \begin{xlist}{MORE\_SCRIPTS $\longrightarrow$}
+    \item[BEGIN $\longrightarrow$] initHtml HTML endHtml
+    \item[HTML $\longrightarrow$] HEAD BODY
+    \item[HEAD $\longrightarrow$] $\lambda$ $|$ initHead LEER\_HEAD endHead
+    \item[LEER\_HEAD $\longrightarrow$] TITLE LEER\_HEAD $|$ \\ SCRIPT LEER\_HEAD $|$ $\lambda$
+    \item[TITLE $\longrightarrow$] initTitle noTags endTitle
+    \item[SCRIPT $\longrightarrow$] initScript noTags endScripts
+    \item[BODY $\longrightarrow$] $\lambda$ $|$ initBody LEER\_BODY endBody
+    \item[LEER\_BODY $\longrightarrow$] $\lambda$ $|$ noTags LEER\_BODY $|$ br LEER\_BODY $|$ \\ initDiv LEER\_BODY endDiv LEER\_BODY $|$ \\ initP LEER\_BODY endP LEER\_BODY $|$ \\ initH1 LEER\_BODY endH1 LEER\_BODY  
+  \end{xlist}
+
+\indent Para resolver el problema haremos una traducci\'on dirigida por sintaxis incorporando acciones en nuestras producciones.\\
+\indent Al comenzar, imprimiremos el comienzo de la estructura HTML que permitir\'a la visualizaci\'on en un \textit{browser}, junto con el estilo que le dar\'a colores a las distintas clases de tags. Estos estar\'an contenidos dentro de elementos \texttt{span} cuya clase fijar\'a los colores. Para la indentaci\'on, los tags que la requieran estar\'an contenidos dentro de bloques \texttt{div}. Esto es basicamente lo sugerido por la c\'atedra.\\
+\indent Vale mencionar que nuestros tags ahora ser\'an el texto de otro documento HTML, es decir, el resultado de nuestro programa.

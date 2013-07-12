@@ -1,0 +1,185 @@
+\documentclass[11pt, a4paper, spanish]{article}
+
+%%%%%%%%%% COMIENZO DEL PREAMBULO %%%%%%%%%%
+
+%Info sobre este documento
+\author{Martin Cammi}
+\title{Trabajo Pr'actico de Teor\'ia de Lenguajes}
+
+%\usepackage{infostyle}                                                  % provee un look & feel similar a un documento Word
+\usepackage[top=2.5cm, bottom=2.5cm, left=2.5cm, right=2.5cm]{geometry}  % m\'argenes
+\usepackage[ansinew]{inputenc}                                           % permite que los acentos del estilo \'a\'e\'i\'o\'u salgan joya
+\usepackage[spanish, activeacute]{babel}                                 % idioma espa\~{n}ol, acentos f\'aciles y deletreo de palabras
+\usepackage{indentfirst}                                                 % permite indentar un parrafo a mano
+\usepackage{caratula}                                                    % incluye caratula est\'andar
+\usepackage{graphicx}                                                    % permite insertar gr\'aficos
+\usepackage{color}                                                       % permite el uso de colores en el documento
+\usepackage[pdfcreator={TexLive!, LaTeX2e con TeXnicCenter},
+			pdfauthor={Grupo 2"},
+			pdftitle={Teor\'ia de Lenguajes - Trabajo practico},
+			pdfsubject={Trabajo practico: Micro HTML Prettyprint - segunda parte},
+			pdfkeywords={MER, MR},
+			pdfstartview=FitH,            % Fits the width of the page to the window
+			bookmarksnumbered,            % los bookmarks numerados se ven mejor...
+			colorlinks,                   % links con bellos colores
+			linkcolor=magenta]            % permite cambiar el color de los links
+			{hyperref}                    % Permite jugar con algunas cosas que aparecer\'an en el PDF final
+\usepackage{hyperref}
+\usepackage{ulem}
+%\selectlanguage{spanish}
+\usepackage{listings}
+\usepackage{color}
+\usepackage{xcolor}
+\usepackage{caption}
+\lstset{language=Java,captionpos=t,tabsize=3,frame=no,keywordstyle=\color{blue},
+        commentstyle=\color{gray},stringstyle=\color{red},numbers=left,numberstyle=\tiny,
+        numbersep=5pt,breaklines=true,showstringspaces=false,basicstyle=\footnotesize,emph={label}}
+\linespread{1.3}                    % interlineado equivalente al 1.5 l\'ineas de Word...
+\pagestyle{myheadings}              %encabezado personalizable con \markboth{}{}
+\markboth{}{Micro HTML PrettyPrint (parser). (Cammi, De Sousa Bispo, Felisatti) }
+\headsep = 30pt                     % separaci\'on entre encabezado y comienzo del p\'arrafo
+
+%\addtolength{\oddsidemargin}{-2cm}	% configuracion IDEAL!!!
+%\addtolength{\textwidth}{4cm}
+%\addtolength{\textheight}{2cm}
+
+% macro 'todo' para To-Do's
+\def\todo#1{\textcolor{red}{#1}}
+
+% Macro 'borde' para un texto con borde
+\newsavebox{\fmbox}
+\newenvironment{borde}[1]
+{\begin{lrbox}{\fmbox}\begin{minipage}{#1}}
+{\end{minipage}\end{lrbox}\fbox{\usebox{\fmbox}}\\[10pt]}
+
+% para que la gramatica quede linda
+\newenvironment{xlist}[1]{%
+	\begin{list}{}{%
+		\settowidth{\labelwidth}{#1}
+		\setlength{\labelsep}{0.5cm}
+		\setlength{\leftmargin}{\labelwidth}
+		\addtolength{\leftmargin}{\labelsep}
+		\setlength{\rightmargin}{0pt}
+		\setlength{\parsep}{0.5ex plus0.2ex minus0.1ex}
+		\setlength{\itemsep}{0ex plus0.2ex}
+		}
+	}
+{\end{list}}%%%%%%%%%% FIN DEL PREAMBULO %%%%%%%%%%
+
+\begin{document}
+
+\materia{Teor\'ia de Lenguajes}
+\submateria{Primer Cuatrimestre de 2013}
+\titulo{Trabajo pr\'actico}
+\subtitulo{Micro HTML Prettyprint }
+\grupo{}
+
+\integrante{Cammi, Mart\'in}{676/02}{martincammi@gmail.com}
+\integrante{De Sousa Bispo, Mariano}{389/08}{marian\_sabianaa@hotmail.com}
+\integrante{Felisatti, Ana}{335/10}{anafelisatti@gmail.com}
+
+
+%\begin{center}
+%	\includegraphics[scale=0.35]{diagramas/chuck-norris-thumbs-up.png}\\
+%\end{center}
+
+
+\maketitle
+
+\thispagestyle{empty}
+
+\newpage
+
+% Conviene poner las secciones como diferentes archivos,
+% sobre todo cuando se trabaja en equipo.
+% Es m\'as f\'acil para sincronizar mediante control de versiones.
+%\input{Introducci\'on}
+
+
+% BEGIN Ejemplos de uso
+
+	%\section{Una secci\'on}
+	%\label{sec:unaSeccion}
+	%Hola! Soy una Secci\'on
+	%	\subsection{Una subsecci\'on}
+	%		Y yo soy una subsecci\'on!!!
+	%		\subsubsection{Una subsubsecci\'on}
+	%			Y yo soy una sub-subsecci\'on!!!
+	%			\paragraph{Un p\'arrafo\\}
+	%				Y yo soy un p\'arrafo, porque no hay mas sub-sub-sub-subsecciones!!!
+
+	%\section{Otra secci\'on}
+	%	Como pudimos ver en la secci\'on \ref{sec:unaSeccion}, esto es una demo de una referencia a una secci\'on.
+	
+	%	Tambi\'en podemos hacer referencia a la p\'agina de la secci\'on:\\[10pt]
+	
+		% Ejemplo de uso de un borde (falta pulir para que no tire un warning!)
+	%	\begin{borde}{0.98\textwidth}
+	%		En la p\'agina \pageref{sec:unaSeccion}, hay una secci\'on pilla...
+	%	\end{borde}
+
+% END Ejemplos de uso
+
+\section{Introducci\'on}
+
+\indent En el presente trabajo pr\'actico presentaremos un parser para la gram\'atica de la primer parte. Adem\'as, detallaremos las modificaciones realizadas a esta y las desiciones tomadas para implementar el parser. Finalmente, presentaremos una serie de htmls v\'alidos e inv\'alidos. \\
+\indent El problema consiste en validar un texto html simple y a su vez obtener una copia visualizable desde un \textit{browser}, con el c\'odigo HTML indentado y con atributos visuales distintivos. Para ello utilizamos la herramienta ANTLR para Java, que nos permiti\'o definir una gr\'amatica con acciones atribuidas a cada producci\'on, junto con los tokens l\'exicos necesarios.
+
+\section{Gram\'atica}
+\indent Nuestra gram\'atica, modificada seg\'un las correcciones y modificaciones de implementaci\'on, es la siguiente: \\
+	\input{gramatica.tex}
+
+\section{Expresiones regulares}
+\indent Nuestros tokens ahora son: \\
+	\input{expresiones_regulares.tex}
+\newpage
+\section{Parser}
+\indent Utilizando ANTLR, definimos nuestra gram\'atica y los tokens l\'exicos para generar as\'i el lexer y el parser. Su implementaci\'on se encuentra en el archivo \texttt{PrettyPrint.g}. Notar que adem\'as de los tokens previamente nombrados, tenemos los que reconocen espacios y comentarios, ocult\'andolos.\\
+\indent La clase \texttt{PrettyPrinter} engloba todas las funciones de impresi\'on que se utilizan en las producciones, por ejemplo, impresi\'on del comienzo de un bloque de indentaci\'on, su final o el comienzo de un \texttt{span} que aporte estilo. \\
+\indent Cada producci\'on define lo que debe imprimirse, por ejemplo, sabemos que en 
+	 \begin{xlist}{MORE\_SCRIPTS $\longrightarrow$}
+	 \item[TITLE $\longrightarrow$] initTitle noTags endTitle
+	 \end{xlist}
+\indent debemos imprimir la apertura del tag \texttt{title}, el texto en medio y su clasura. \\
+\indent Para imprimir el texto utilizamos el atributo \texttt{text} del token \textit{noTags}. Todas estas operaciones tienen un efecto colateral sobre la clase \texttt{PrettyPrinter}, la cual es un Singleton que es accedida por el parser y el main.\\
+\indent Para manejar los errores, sobreescribimos el m\'etodo \texttt{reportError} de ANTLR (tanto en el lexer como en el parser) para que levante una excepci\'on y la ejecuci\'on se detenga. De ocurrir tal excepci\'on, es atrapada por el main y se imprime un HTML de error con el mensaje de la misma. 
+\section{HTMLs}
+\indent A modo de prueba, generamos archivos HTML de entrada que pueden encontrarse en la carpeta \texttt{Tests} adjunta al informe, junto con los \texttt{.html} resultantes para cada uno. A continuaci\'on detallamos que se testeo en cada uno.
+\subsection{V\'alidos}
+\begin{itemize}
+\item{emptyhtml: vac\'io, es decir, sin head ni body.}
+\item{emptyheadbody: sin head, \'unicamente con body.}
+\item{noscripts: head con s\'olo title, body sin tags internos.}
+\item{severalscriptsemptybody: tres scripts con title en medio, sin body.}
+\item{nobody: head con title, sin body.}
+\item{nestedtags: head con solo scripts, body con varios tags anidados.}
+\item{hugebody: title, script, body con varios tags internos y anidamiento.}
+\item{comments: sin head, body, dos comentarios.}
+\item{input: ejemplo de la c\'atedra.}
+\end{itemize}
+\subsection{Inv\'alidos}
+\begin{itemize}
+\item{lexererrorhtml: token inicial incorrecto, es rechazado por el lexer.}
+\item{lexererrormismatch: tag en title, es rechazado por el lexer por contener $<$.}
+\item{parsererrorunclosedbody: token de cierre de body faltante, es rechazado por el parser.}
+\item{parsererrormisplacedtag: token p en head, es rechazado por el parser.}
+\end{itemize}
+
+\section{Modo de Uso}
+\indent El programa entregado puede ejecutarse en cualquier sistema operativo que soporte Java desde una terminal con el siguiente comando: \texttt{java $\-$jar tleng\_tp2.jar}. Recibe por \texttt{STDIN} el HTML a procesar y devuelve por \texttt{STDOUT} el ya procesado.
+\newpage
+\section{C\'odigo fuente}
+\subsection{Gram\'atica}
+\lstinputlisting{PrettyPrint.g}
+\newpage
+\subsection{Main}
+\lstinputlisting{TP2.java}
+\newpage
+\subsection{Printer}
+\lstinputlisting{PrettyPrinter.java}
+\newpage
+
+\section{Conclusi\'on}
+\indent La utilizaci\'on de gram\'aticas para el parsing de un lenguaje simplifica y abstrae la tarea. ANTLR es una herramienta muy poderosa que permite al desarrollador concentrarse en la aplicaci\'on de la gram\'atica y no en los por menores de la implementaci\'on del parser. Si bien s\'olo hemos explorado una peque\~na parte de lo que las gram\'aticas, expresiones regulares y esta herramienta permiten crear, es evidente su potencial y utilidad.
+
+\end{document}

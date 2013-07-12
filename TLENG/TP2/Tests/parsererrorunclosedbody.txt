@@ -1,0 +1,1 @@
+<html><head><title>Democracy</title><script>import government; speech.awesome(); problem.off();</script></head><body><h1>La casa esta en orden.</h1></html>

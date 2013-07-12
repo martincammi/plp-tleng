@@ -1,0 +1,28 @@
+\begin{center}
+    \begin{tabular}{| l | l | l | p{5cm} |}
+    \hline
+    \textbf{\textit{Terminal}} 	& \textbf{\textit{Expresi\'on regular}} 	\\ \hline
+    initHtml 		& $<$html$>$ 			 \\ \hline
+    endHtml  		& $<$/html$>$  			 \\ \hline
+    initHead		& $<$head$>$ 			 \\ \hline
+    endHead	 	& $<$/head$>$ 			 \\ \hline
+    initBody 		& $<$body$>$ 			 \\ \hline
+    endBody		& $<$/body$>$  			 \\ \hline
+    initTitle 		& $<$title$>$ 			 \\ \hline
+    endTitle  		& $<$/title$>$ 			 \\ \hline
+    initScript		& $<$script$>$ 			 \\ \hline
+    endScript		& $<$/script$>$  			 \\ \hline
+    initDiv		& $<$div$>$ 			 \\ \hline
+    endDiv		&  $<$/div$>$ 			 \\ \hline
+    initH1		& $<$h1$>$ 			 \\ \hline
+    endH1		& $<$/h1$>$  			 \\ \hline
+    initP 		& $<$p$>$ 				 \\ \hline
+    endP 		& $<$/p$>$ 				 \\ \hline
+    br			&$<$br$>$ 				 \\ \hline
+    noTags		&($\string~$($<$ $|$ $>$))* 			 \\ \hline
+
+    \end{tabular}
+\end{center}
+
+\indent El token \textit{noTags} ahora se representa con una expresi\'on regular que identifica cualquier texto que no contenga s\'imbolos menor o mayor, es decir, apertura y cierre de tags. No conseguimos implementarla como propusimos en un principio, es decir, que identificara cualquier texto excepto los tags de la gr\'amatica porque las expresiones regulares en ANTLR son distintas de las de Java y no encontramos manera de adaptarlo.\\
+\indent Esto mismo vale para lo contenido entre los tokens \textit{initScript} y \textit{endScript} que inicialmente era cualquier texto sin estos tokens. Por ello ahora tambi\'en \textit{noTags} es lo esperado entre tales tokens.
